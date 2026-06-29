@@ -52,12 +52,12 @@
                 </a>
                 
                 <!-- Desktop Menu -->
-                <div class="hidden md:flex space-x-4 items-center">
-                    <a href="#home" :class="{'text-slate-600 hover:text-indigo-600': scrolled, 'text-white/90 hover:text-white drop-shadow-sm': !scrolled}" class="font-semibold transition-all px-2 py-2 text-sm hover:-translate-y-0.5 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-indigo-600 after:transition-all hover:after:w-full" :class="{'after:bg-indigo-600': scrolled, 'after:bg-white': !scrolled}">Beranda</a>
-                    <a href="#about" :class="{'text-slate-600 hover:text-indigo-600': scrolled, 'text-white/90 hover:text-white drop-shadow-sm': !scrolled}" class="font-semibold transition-all px-2 py-2 text-sm hover:-translate-y-0.5 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-indigo-600 after:transition-all hover:after:w-full" :class="{'after:bg-indigo-600': scrolled, 'after:bg-white': !scrolled}">Tentang</a>
-                    <a href="#news" :class="{'text-slate-600 hover:text-indigo-600': scrolled, 'text-white/90 hover:text-white drop-shadow-sm': !scrolled}" class="font-semibold transition-all px-2 py-2 text-sm hover:-translate-y-0.5 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-indigo-600 after:transition-all hover:after:w-full" :class="{'after:bg-indigo-600': scrolled, 'after:bg-white': !scrolled}">Berita</a>
-                    <a href="#activities" :class="{'text-slate-600 hover:text-indigo-600': scrolled, 'text-white/90 hover:text-white drop-shadow-sm': !scrolled}" class="font-semibold transition-all px-2 py-2 text-sm hover:-translate-y-0.5 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-indigo-600 after:transition-all hover:after:w-full" :class="{'after:bg-indigo-600': scrolled, 'after:bg-white': !scrolled}">Kegiatan</a>
-                    <a href="#gallery" :class="{'text-slate-600 hover:text-indigo-600': scrolled, 'text-white/90 hover:text-white drop-shadow-sm': !scrolled}" class="font-semibold transition-all px-2 py-2 text-sm hover:-translate-y-0.5 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-indigo-600 after:transition-all hover:after:w-full" :class="{'after:bg-indigo-600': scrolled, 'after:bg-white': !scrolled}">Galeri</a>
+                <div class="hidden md:flex items-center transition-all duration-300 space-x-2 px-4 py-1.5 rounded-full border" :class="{'bg-transparent border-transparent': scrolled, 'bg-white/10 backdrop-blur-md border-white/20 shadow-sm': !scrolled}">
+                    <a href="#home" :class="{'text-slate-600 hover:text-indigo-600': scrolled, 'text-white/95 hover:text-white drop-shadow-sm': !scrolled}" class="font-semibold transition-all px-3 py-2 text-sm hover:-translate-y-0.5 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:transition-all hover:after:w-full" :class="{'after:bg-indigo-600': scrolled, 'after:bg-white': !scrolled}">Beranda</a>
+                    <a href="#about" :class="{'text-slate-600 hover:text-indigo-600': scrolled, 'text-white/95 hover:text-white drop-shadow-sm': !scrolled}" class="font-semibold transition-all px-3 py-2 text-sm hover:-translate-y-0.5 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:transition-all hover:after:w-full" :class="{'after:bg-indigo-600': scrolled, 'after:bg-white': !scrolled}">Tentang</a>
+                    <a href="#news" :class="{'text-slate-600 hover:text-indigo-600': scrolled, 'text-white/95 hover:text-white drop-shadow-sm': !scrolled}" class="font-semibold transition-all px-3 py-2 text-sm hover:-translate-y-0.5 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:transition-all hover:after:w-full" :class="{'after:bg-indigo-600': scrolled, 'after:bg-white': !scrolled}">Berita</a>
+                    <a href="#activities" :class="{'text-slate-600 hover:text-indigo-600': scrolled, 'text-white/95 hover:text-white drop-shadow-sm': !scrolled}" class="font-semibold transition-all px-3 py-2 text-sm hover:-translate-y-0.5 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:transition-all hover:after:w-full" :class="{'after:bg-indigo-600': scrolled, 'after:bg-white': !scrolled}">Kegiatan</a>
+                    <a href="#gallery" :class="{'text-slate-600 hover:text-indigo-600': scrolled, 'text-white/95 hover:text-white drop-shadow-sm': !scrolled}" class="font-semibold transition-all px-3 py-2 text-sm hover:-translate-y-0.5 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:transition-all hover:after:w-full" :class="{'after:bg-indigo-600': scrolled, 'after:bg-white': !scrolled}">Galeri</a>
                 </div>
 
                 <!-- Action Button -->
@@ -104,34 +104,38 @@
         @yield('content')
     </main>
 
-    <!-- Clean Footer -->
-    <footer class="bg-white border-t border-slate-200 pt-16 pb-8 relative overflow-hidden">
+    <!-- Colorful Footer -->
+    <footer class="bg-slate-900 pt-16 pb-8 relative overflow-hidden text-slate-300">
         <!-- Subtle motif -->
-        <div class="absolute top-0 right-0 w-64 h-64 bg-grid-pattern opacity-30 pointer-events-none rounded-bl-full"></div>
+        <div class="absolute top-0 right-0 w-64 h-64 bg-grid-pattern opacity-10 pointer-events-none rounded-bl-full"></div>
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 mb-12">
                 
                 <div class="md:col-span-5">
                     <div class="flex items-center gap-3 mb-6">
-                        <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-heading font-bold">TS</div>
-                        <span class="font-heading font-bold text-xl text-slate-800">{{ $settings['school_name'] ?? 'Taman Seminari' }}</span>
+                        <div class="w-10 h-10 bg-indigo-500 rounded-xl flex items-center justify-center text-white font-heading font-bold text-lg shadow-lg">TS</div>
+                        <span class="font-heading font-bold text-2xl text-white">{{ $settings['school_name'] ?? 'Taman Seminari' }}</span>
                     </div>
-                    <p class="text-slate-500 leading-relaxed pr-8">Menyediakan lingkungan yang kondusif, bersih, dan interaktif bagi tumbuh kembang optimal anak usia dini.</p>
+                    <p class="text-slate-400 leading-relaxed pr-8">Menyediakan lingkungan yang kondusif, bersih, dan interaktif bagi tumbuh kembang optimal anak usia dini.</p>
                 </div>
                 
                 <div class="md:col-span-4">
-                    <h4 class="font-heading font-semibold text-slate-800 mb-6 uppercase tracking-wider text-sm">Informasi Kontak</h4>
-                    <ul class="space-y-4 text-slate-600">
+                    <h4 class="font-heading font-semibold text-white mb-6 uppercase tracking-wider text-sm">Informasi Kontak</h4>
+                    <ul class="space-y-4 text-slate-400">
                         @if(!empty($settings['address']))
                         <li class="flex items-start gap-3">
-                            <svg class="w-5 h-5 text-slate-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                            <span class="text-sm leading-relaxed">{{ $settings['address'] }}</span>
+                            <div class="bg-slate-800 p-2 rounded-lg shrink-0">
+                                <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            </div>
+                            <span class="text-sm leading-relaxed mt-1">{{ $settings['address'] }}</span>
                         </li>
                         @endif
                         @if(!empty($settings['phone']))
                         <li class="flex items-center gap-3">
-                            <svg class="w-5 h-5 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            <div class="bg-slate-800 p-2 rounded-lg shrink-0">
+                                <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            </div>
                             <span class="text-sm">{{ $settings['phone'] }}</span>
                         </li>
                         @endif
@@ -139,18 +143,18 @@
                 </div>
 
                 <div class="md:col-span-3">
-                    <h4 class="font-heading font-semibold text-slate-800 mb-6 uppercase tracking-wider text-sm">Tautan Cepat</h4>
+                    <h4 class="font-heading font-semibold text-white mb-6 uppercase tracking-wider text-sm">Tautan Cepat</h4>
                     <ul class="space-y-3">
-                        <li><a href="#home" class="text-slate-500 hover:text-indigo-600 text-sm transition-colors">Beranda</a></li>
-                        <li><a href="#about" class="text-slate-500 hover:text-indigo-600 text-sm transition-colors">Tentang Kami</a></li>
-                        <li><a href="#activities" class="text-slate-500 hover:text-indigo-600 text-sm transition-colors">Kegiatan & Berita</a></li>
-                        <li><a href="#gallery" class="text-slate-500 hover:text-indigo-600 text-sm transition-colors">Galeri Dokumentasi</a></li>
+                        <li><a href="#home" class="text-slate-400 hover:text-indigo-400 text-sm transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span> Beranda</a></li>
+                        <li><a href="#about" class="text-slate-400 hover:text-indigo-400 text-sm transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span> Tentang Kami</a></li>
+                        <li><a href="#activities" class="text-slate-400 hover:text-indigo-400 text-sm transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span> Kegiatan & Berita</a></li>
+                        <li><a href="#gallery" class="text-slate-400 hover:text-indigo-400 text-sm transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span> Galeri Dokumentasi</a></li>
                     </ul>
                 </div>
             </div>
             
-            <div class="border-t border-slate-100 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-                <p class="text-sm text-slate-400">&copy; {{ date('Y') }} {{ $settings['school_name'] ?? 'Taman Seminari' }}. Hak Cipta Dilindungi.</p>
+            <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-sm text-slate-500">&copy; {{ date('Y') }} {{ $settings['school_name'] ?? 'Taman Seminari' }}. Hak Cipta Dilindungi.</p>
             </div>
         </div>
     </footer>

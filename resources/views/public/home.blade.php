@@ -62,8 +62,8 @@
 </section>
 
 <!-- About Section -->
-<section id="about" class="py-24 relative bg-[#FAFAFA]">
-    <div class="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none"></div>
+<section id="about" class="py-24 relative bg-orange-50">
+    <div class="absolute inset-0 bg-dots-pattern opacity-30 pointer-events-none"></div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="bg-white rounded-3xl p-8 md:p-16 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 flex flex-col lg:flex-row gap-12 items-center">
             
@@ -109,60 +109,87 @@
     </div>
 </section>
 
-<!-- News & Activities Section (Combined Layout) -->
-<section id="news" class="py-24 bg-white relative">
+<!-- News Section -->
+<section id="news" class="py-24 bg-indigo-50/50 relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-            <div class="max-w-2xl">
-                <span class="inline-block py-1.5 px-4 rounded-full bg-indigo-50 text-indigo-600 font-semibold text-sm tracking-wide mb-4">Informasi Terbaru</span>
-                <h3 class="text-3xl md:text-4xl font-heading font-bold text-slate-800">Berita & Kegiatan</h3>
-            </div>
-            <div class="flex gap-2" x-data="{ filter: 'all' }">
-                <!-- Optional filter buttons could go here -->
-            </div>
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="inline-block py-1.5 px-4 rounded-full bg-indigo-100 text-indigo-600 font-semibold text-sm tracking-wide mb-4">Informasi Terbaru</span>
+            <h3 class="text-3xl md:text-4xl font-heading font-bold text-slate-800">Berita Sekolah</h3>
+            <p class="text-slate-500 mt-3">Kabar dan pengumuman terbaru dari Taman Seminari.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="activities">
-            <!-- Interleave News and Activities up to 6 items total for clean look -->
-            @php
-                $items = collect();
-                foreach($newsList as $n) { $items->push((object)['type' => 'news', 'data' => $n, 'date' => $n->published_at]); }
-                foreach($activities as $a) { $items->push((object)['type' => 'activity', 'data' => $a, 'date' => $a->activity_date]); }
-                $sortedItems = $items->sortByDesc('date')->take(6);
-            @endphp
-
-            @forelse($sortedItems as $item)
-            <div class="group bg-white rounded-3xl overflow-hidden border border-slate-100 hover-lift flex flex-col">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            @forelse($newsList->take(3) as $news)
+            <div class="group bg-white rounded-3xl overflow-hidden border border-slate-100 hover-lift flex flex-col shadow-sm">
                 <div class="aspect-[4/3] relative overflow-hidden bg-slate-100">
-                    @if($item->data->image_path)
-                    <img src="{{ asset('storage/'.$item->data->image_path) }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    @if($news->image_path)
+                    <img src="{{ asset('storage/'.$news->image_path) }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
                     @else
-                    <div class="w-full h-full bg-slate-50 flex items-center justify-center">
-                        <svg class="w-12 h-12 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                    <div class="w-full h-full bg-indigo-50 flex items-center justify-center">
+                        <svg class="w-12 h-12 text-indigo-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
                     </div>
                     @endif
-                    
-                    <div class="absolute top-4 left-4 flex gap-2">
-                        @if($item->type === 'news')
-                        <span class="bg-white/90 backdrop-blur-sm text-indigo-600 text-xs font-semibold px-3 py-1 rounded-full shadow-sm">Berita</span>
-                        @else
-                        <span class="bg-white/90 backdrop-blur-sm text-teal-600 text-xs font-semibold px-3 py-1 rounded-full shadow-sm">Kegiatan</span>
-                        @endif
+                    <div class="absolute top-4 left-4">
+                        <span class="bg-indigo-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-sm">Berita</span>
                     </div>
                 </div>
                 <div class="p-6 flex flex-col flex-1">
                     <div class="text-sm text-slate-400 mb-3 flex items-center gap-2">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                        {{ $item->date ? $item->date->format('d M Y') : '-' }}
+                        {{ $news->published_at ? $news->published_at->format('d M Y') : '-' }}
                     </div>
-                    <h4 class="font-heading font-bold text-xl text-slate-800 mb-3 group-hover:text-indigo-600 transition-colors">{{ $item->data->title }}</h4>
-                    <p class="text-slate-500 text-sm leading-relaxed line-clamp-3 mb-4">{{ $item->type === 'news' ? $item->data->content : $item->data->description }}</p>
+                    <h4 class="font-heading font-bold text-xl text-slate-800 mb-3 group-hover:text-indigo-600 transition-colors">{{ $news->title }}</h4>
+                    <p class="text-slate-500 text-sm leading-relaxed line-clamp-3">{{ $news->content }}</p>
                 </div>
             </div>
             @empty
-            <div class="col-span-full py-16 text-center border-2 border-dashed border-slate-200 rounded-3xl bg-slate-50">
-                <p class="text-slate-500 font-medium">Belum ada informasi yang ditambahkan.</p>
+            <div class="col-span-full py-16 text-center border-2 border-dashed border-indigo-200 rounded-3xl bg-white/60">
+                <p class="text-slate-400 font-medium">Belum ada berita yang ditambahkan.</p>
+            </div>
+            @endforelse
+        </div>
+    </div>
+</section>
+
+<!-- Activities Section -->
+<section id="activities" class="py-24 bg-teal-50 relative border-t border-teal-100">
+    <div class="absolute inset-0 bg-dots-pattern opacity-20 pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="inline-block py-1.5 px-4 rounded-full bg-teal-100 text-teal-700 font-semibold text-sm tracking-wide mb-4">Agenda Sekolah</span>
+            <h3 class="text-3xl md:text-4xl font-heading font-bold text-slate-800">Kegiatan Siswa</h3>
+            <p class="text-slate-500 mt-3">Program dan kegiatan seru yang diikuti oleh anak-anak kami.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            @forelse($activities->take(3) as $activity)
+            <div class="group bg-white rounded-3xl overflow-hidden border border-teal-100 hover-lift flex flex-col shadow-sm">
+                <div class="aspect-[4/3] relative overflow-hidden bg-slate-100">
+                    @if($activity->image_path)
+                    <img src="{{ asset('storage/'.$activity->image_path) }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    @else
+                    <div class="w-full h-full bg-teal-50 flex items-center justify-center">
+                        <svg class="w-12 h-12 text-teal-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    @endif
+                    <div class="absolute top-4 left-4">
+                        <span class="bg-teal-600 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-sm">Kegiatan</span>
+                    </div>
+                </div>
+                <div class="p-6 flex flex-col flex-1">
+                    <div class="text-sm text-slate-400 mb-3 flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        {{ $activity->activity_date ? $activity->activity_date->format('d M Y') : '-' }}
+                    </div>
+                    <h4 class="font-heading font-bold text-xl text-slate-800 mb-3 group-hover:text-teal-600 transition-colors">{{ $activity->title }}</h4>
+                    <p class="text-slate-500 text-sm leading-relaxed line-clamp-3">{{ $activity->description }}</p>
+                </div>
+            </div>
+            @empty
+            <div class="col-span-full py-16 text-center border-2 border-dashed border-teal-200 rounded-3xl bg-white/60">
+                <p class="text-slate-400 font-medium">Belum ada kegiatan yang ditambahkan.</p>
             </div>
             @endforelse
         </div>
@@ -170,8 +197,9 @@
 </section>
 
 <!-- Clean Gallery Section -->
-<section id="gallery" class="py-24 bg-[#FAFAFA] relative border-t border-slate-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section id="gallery" class="py-24 bg-teal-50 relative border-t border-slate-100">
+    <div class="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="text-center max-w-2xl mx-auto mb-16">
             <h3 class="text-3xl md:text-4xl font-heading font-bold text-slate-800 mb-4">Galeri Dokumentasi</h3>
             <p class="text-slate-500">Momen-momen berharga dalam kegiatan belajar mengajar.</p>
@@ -195,7 +223,7 @@
 </section>
 
 <!-- Clean FAQ Section -->
-<section class="py-24 bg-white relative border-t border-slate-100">
+<section class="py-24 bg-purple-50 relative border-t border-slate-100">
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
             <h3 class="text-3xl md:text-4xl font-heading font-bold text-slate-800 mb-4">Pertanyaan Umum</h3>
@@ -224,59 +252,78 @@
     </div>
 </section>
 
-<!-- Minimal Contact / Map Section -->
-<section class="py-0 bg-slate-50 relative border-t border-slate-200">
-    <div class="grid grid-cols-1 lg:grid-cols-2">
-        <!-- Info Side -->
-        <div class="px-8 py-20 lg:p-24 flex flex-col justify-center">
-            <h3 class="text-3xl font-heading font-bold text-slate-800 mb-6">Mari Berkunjung</h3>
-            <p class="text-slate-500 mb-10 leading-relaxed max-w-md">Kami menantikan kedatangan Anda untuk berdiskusi tentang pendidikan terbaik bagi putra-putri Anda.</p>
-            
-            <div class="space-y-6">
+<!-- Contact & Map Section -->
+<section id="contact" class="py-24 bg-slate-50 relative border-t border-slate-100">
+    <div class="absolute inset-0 bg-grid-pattern opacity-20 pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+        <!-- Section Header -->
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="inline-block py-1.5 px-4 rounded-full bg-indigo-100 text-indigo-600 font-semibold text-sm tracking-wide mb-4">Lokasi Kami</span>
+            <h3 class="text-3xl md:text-4xl font-heading font-bold text-slate-800">Mari Berkunjung</h3>
+            <p class="text-slate-500 mt-3">Kami senang menyambut Anda untuk mengenal Taman Seminari lebih dekat.</p>
+        </div>
+
+        <!-- Two-column card: Info + Map -->
+        <div class="rounded-3xl overflow-hidden shadow-xl border border-slate-100 grid grid-cols-1 lg:grid-cols-2 min-h-[420px]">
+
+            <!-- Info Side -->
+            <div class="relative bg-white text-slate-800 flex flex-col justify-center px-10 py-12 lg:px-14 border-r border-slate-100">
+                <div class="absolute inset-0 bg-dots-pattern opacity-30 pointer-events-none"></div>
+                <div class="relative z-10">
+                    <h4 class="text-2xl font-heading font-bold mb-6 text-slate-800">Informasi Kontak</h4>
+                    <div class="space-y-6">
+                        @if(!empty($settings['address']))
+                        <div class="flex gap-4 items-start">
+                            <div class="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center shrink-0 text-slate-600 shadow-sm">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            </div>
+                            <div>
+                                <p class="text-slate-400 text-xs uppercase tracking-wider font-semibold mb-1">Alamat</p>
+                                <p class="text-slate-700 text-sm leading-relaxed">{{ $settings['address'] }}</p>
+                            </div>
+                        </div>
+                        @endif
+
+                        @if(!empty($settings['phone']))
+                        <div class="flex gap-4 items-start">
+                            <div class="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center shrink-0 text-slate-600 shadow-sm">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            </div>
+                            <div>
+                                <p class="text-slate-400 text-xs uppercase tracking-wider font-semibold mb-1">Telepon / WhatsApp</p>
+                                <p class="text-slate-700 text-sm">{{ $settings['phone'] }}</p>
+                            </div>
+                        </div>
+                        <div class="pt-4">
+                            <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $settings['phone']) }}" target="_blank"
+                               class="inline-flex items-center gap-2 px-6 py-3 bg-slate-800 text-white hover:bg-slate-700 rounded-full font-bold text-sm transition-all shadow-md hover:-translate-y-0.5">
+                                <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824z"></path></svg>
+                                Chat via WhatsApp
+                            </a>
+                        </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
+            <!-- Map Side -->
+            <div class="h-[360px] lg:h-auto bg-slate-200 relative">
                 @if(!empty($settings['address']))
-                <div class="flex gap-4">
-                    <div class="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-600 shrink-0 shadow-sm">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    <iframe class="absolute inset-0 w-full h-full border-0" 
+                            src="https://maps.google.com/maps?q={{ urlencode($settings['address']) }}&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                @else
+                    <div class="absolute inset-0 flex flex-col items-center justify-center text-slate-400 bg-slate-100">
+                        <svg class="w-12 h-12 mb-3 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
+                        <p class="font-semibold text-slate-400 text-sm">Peta Belum Tersedia</p>
                     </div>
-                    <div>
-                        <p class="font-semibold text-slate-800 text-sm mb-1">Alamat</p>
-                        <p class="text-slate-500 text-sm leading-relaxed">{{ $settings['address'] }}</p>
-                    </div>
-                </div>
-                @endif
-                
-                @if(!empty($settings['phone']))
-                <div class="flex gap-4">
-                    <div class="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-600 shrink-0 shadow-sm">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-                    </div>
-                    <div>
-                        <p class="font-semibold text-slate-800 text-sm mb-1">Kontak</p>
-                        <p class="text-slate-500 text-sm">{{ $settings['phone'] }}</p>
-                    </div>
-                </div>
-                
-                <div class="pt-6">
-                    <a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $settings['phone']) }}" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white rounded-full font-medium text-sm transition-colors shadow-sm">
-                        Hubungi via WhatsApp
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                    </a>
-                </div>
                 @endif
             </div>
-        </div>
-        
-        <!-- Map Side -->
-        <div class="h-[400px] lg:h-auto w-full bg-slate-200 relative">
-            @if(!empty($settings['map_embed']))
-                {!! str_replace('<iframe', '<iframe class="absolute inset-0 w-full h-full border-0"', $settings['map_embed']) !!}
-            @else
-                <div class="absolute inset-0 flex items-center justify-center text-slate-400">
-                    Peta Belum Dipasang
-                </div>
-            @endif
+
         </div>
     </div>
 </section>
 
 @endsection
+
