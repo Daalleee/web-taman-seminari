@@ -58,6 +58,8 @@
                     <a href="#news" :class="{'text-slate-600 hover:text-indigo-600': scrolled, 'text-white/95 hover:text-white drop-shadow-sm': !scrolled}" class="font-semibold transition-all px-3 py-2 text-sm hover:-translate-y-0.5 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:transition-all hover:after:w-full" :class="{'after:bg-indigo-600': scrolled, 'after:bg-white': !scrolled}">Berita</a>
                     <a href="#activities" :class="{'text-slate-600 hover:text-indigo-600': scrolled, 'text-white/95 hover:text-white drop-shadow-sm': !scrolled}" class="font-semibold transition-all px-3 py-2 text-sm hover:-translate-y-0.5 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:transition-all hover:after:w-full" :class="{'after:bg-indigo-600': scrolled, 'after:bg-white': !scrolled}">Kegiatan</a>
                     <a href="#gallery" :class="{'text-slate-600 hover:text-indigo-600': scrolled, 'text-white/95 hover:text-white drop-shadow-sm': !scrolled}" class="font-semibold transition-all px-3 py-2 text-sm hover:-translate-y-0.5 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:transition-all hover:after:w-full" :class="{'after:bg-indigo-600': scrolled, 'after:bg-white': !scrolled}">Galeri</a>
+                    <a href="#faq" :class="{'text-slate-600 hover:text-indigo-600': scrolled, 'text-white/95 hover:text-white drop-shadow-sm': !scrolled}" class="font-semibold transition-all px-3 py-2 text-sm hover:-translate-y-0.5 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:transition-all hover:after:w-full" :class="{'after:bg-indigo-600': scrolled, 'after:bg-white': !scrolled}">FAQ</a>
+                    <a href="#contact" :class="{'text-slate-600 hover:text-indigo-600': scrolled, 'text-white/95 hover:text-white drop-shadow-sm': !scrolled}" class="font-semibold transition-all px-3 py-2 text-sm hover:-translate-y-0.5 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:transition-all hover:after:w-full" :class="{'after:bg-indigo-600': scrolled, 'after:bg-white': !scrolled}">Kontak</a>
                 </div>
 
                 <!-- Action Button -->
@@ -86,6 +88,8 @@
                     <a href="#news" @click="mobileMenu = false" class="block px-4 py-3 text-base font-semibold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-colors">Berita</a>
                     <a href="#activities" @click="mobileMenu = false" class="block px-4 py-3 text-base font-semibold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-colors">Kegiatan</a>
                     <a href="#gallery" @click="mobileMenu = false" class="block px-4 py-3 text-base font-semibold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-colors">Galeri</a>
+                    <a href="#faq" @click="mobileMenu = false" class="block px-4 py-3 text-base font-semibold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-colors">FAQ</a>
+                    <a href="#contact" @click="mobileMenu = false" class="block px-4 py-3 text-base font-semibold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-colors">Kontak</a>
                     
                     <div class="pt-4 mt-2 border-t border-slate-100">
                         @auth
