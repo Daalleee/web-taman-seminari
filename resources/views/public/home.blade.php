@@ -140,9 +140,9 @@ document.addEventListener('DOMContentLoaded',()=>{
         <div class="bg-white rounded-[2.5rem] p-8 md:p-16 border border-slate-100 border-t-4 border-t-indigo-500 flex flex-col lg:flex-row gap-16 items-center shadow-md">
             
             <div class="lg:w-1/2 space-y-8">
-                <div class="fade-up">
+                <div class="fade-up text-center">
                     <span class="sec-label text-indigo-500 mb-4 block">Profil Institusi</span>
-                    <h3 class="text-4xl md:text-5xl font-heading font-extrabold text-slate-900 leading-tight mt-3">Mengenal Taman Seminari <span class="text-indigo-600">Lebih Dekat</span></h3>
+                    <h3 class="text-4xl md:text-5xl font-heading font-extrabold text-slate-900 leading-tight mt-3">Mengenal Taman Seminari Lebih Dekat</h3>
                 </div>
                 <p class="text-slate-600 leading-relaxed text-lg fade-up">{{ $settings['about_text'] ?? 'Taman Seminari didedikasikan untuk menciptakan lingkungan belajar yang inspiratif dan edukatif bagi anak-anak di usia keemasan dengan standar profesional.' }}</p>
                 
@@ -206,12 +206,10 @@ document.addEventListener('DOMContentLoaded',()=>{
     <div class="sec-num">02</div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        <div class="mb-16 fade-up">
+        <div class="mb-16 fade-up text-center">
             <span class="sec-label text-blue-500 mb-3 block">Informasi Terbaru</span>
-            <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-                <h3 class="text-4xl font-heading font-extrabold text-slate-900">Publikasi <span class="text-blue-600">Terkini</span></h3>
-                <a href="#activities" class="pill-btn pill-btn-outline text-blue-600 border-blue-200 hover:bg-blue-50 self-start sm:self-auto">Kegiatan <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
-            </div>
+            <h3 class="text-4xl font-heading font-extrabold text-slate-900 mb-6">Publikasi Terkini</h3>
+            <a href="#activities" class="pill-btn pill-btn-outline text-blue-600 border-blue-200 hover:bg-blue-50">Kegiatan <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -267,12 +265,10 @@ document.addEventListener('DOMContentLoaded',()=>{
     <div class="sec-num">03</div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-        <div class="mb-16 fade-up">
+        <div class="mb-16 fade-up text-center">
             <span class="sec-label text-cyan-500 mb-3 block">Agenda Institusi</span>
-            <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-                <h3 class="text-4xl font-heading font-extrabold text-slate-900">Kegiatan <span class="text-cyan-600">Siswa</span></h3>
-                <a href="#gallery" class="pill-btn pill-btn-solid bg-cyan-600 border-cyan-600 hover:bg-cyan-700 self-start sm:self-auto">Lihat Galeri <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
-            </div>
+            <h3 class="text-4xl font-heading font-extrabold text-slate-900 mb-6">Kegiatan Siswa</h3>
+            <a href="#gallery" class="pill-btn pill-btn-solid bg-cyan-600 border-cyan-600 hover:bg-cyan-700">Lihat Galeri <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -327,12 +323,10 @@ document.addEventListener('DOMContentLoaded',()=>{
     <div class="absolute inset-0 bg-motif-grid opacity-40"></div>
     <div class="sec-num">04</div>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="mb-16 fade-up">
+        <div class="mb-16 fade-up text-center">
             <span class="sec-label text-purple-500 mb-3 block">Portofolio</span>
-            <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-                <h3 class="text-4xl font-heading font-extrabold text-slate-900">Galeri <span class="text-purple-600">Dokumentasi</span></h3>
-                <a href="#faq" class="pill-btn pill-btn-outline text-purple-600 border-purple-200 hover:bg-purple-50 self-start sm:self-auto">FAQ <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
-            </div>
+            <h3 class="text-4xl font-heading font-extrabold text-slate-900 mb-6">Galeri Dokumentasi</h3>
+            <a href="#faq" class="pill-btn pill-btn-outline text-purple-600 border-purple-200 hover:bg-purple-50">FAQ <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
         </div>
 
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
@@ -372,12 +366,10 @@ document.addEventListener('DOMContentLoaded',()=>{
     <div class="absolute inset-0 bg-motif-dots opacity-30"></div>
     <div class="sec-num">05</div>
     <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="mb-16 fade-up">
+        <div class="mb-16 fade-up text-center">
             <span class="sec-label text-teal-500 mb-3 block">Pusat Informasi</span>
-            <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-                <h3 class="text-4xl font-heading font-extrabold text-slate-900">Pertanyaan <span class="text-teal-600">Umum</span></h3>
-                <a href="#contact" class="pill-btn pill-btn-solid bg-teal-600 border-teal-600 hover:bg-teal-700 self-start sm:self-auto">Hubungi Kami <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
-            </div>
+            <h3 class="text-4xl font-heading font-extrabold text-slate-900 mb-6">Pertanyaan Umum</h3>
+            <a href="#contact" class="pill-btn pill-btn-solid bg-teal-600 border-teal-600 hover:bg-teal-700">Hubungi Kami <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></a>
         </div>
 
         <div class="space-y-4" x-data="{ active: null }">
@@ -417,9 +409,9 @@ document.addEventListener('DOMContentLoaded',()=>{
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
         <!-- Section Header -->
-        <div class="mb-16 fade-up">
+        <div class="mb-16 fade-up text-center">
             <span class="sec-label text-sky-500 mb-3 block">Lokasi & Kontak</span>
-            <h3 class="text-4xl font-heading font-extrabold text-slate-900">Mari <span class="text-sky-600">Berkunjung</span></h3>
+            <h3 class="text-4xl font-heading font-extrabold text-slate-900">Mari Berkunjung</h3>
         </div>
 
         <!-- Two-column card: Info + Map -->
