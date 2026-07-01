@@ -23,7 +23,7 @@
 <nav x-data="{ activeSection: 'home', mobileMenu: false, scrolled: false }" @scroll.window="scrolled = (window.pageYOffset > 20)"
      class="w-full top-0 sticky z-50 bg-surface dark:bg-surface-container-low border-b border-primary/10 transition-all duration-300"
      :class="{'scrolled-nav shadow-md': scrolled}">
-    <div class="flex justify-between items-center max-w-container-max mx-auto px-margin-mobile md:px-gutter h-20">
+    <div class="flex justify-between items-center max-w-container-max mx-auto px-margin-mobile md:px-gutter h-16">
         <a href="{{ url('/#home') }}" class="text-2xl font-bold tracking-tight" style="color: #001e40; font-family: 'Source Serif 4', serif;">Taman Seminari</a>
         <div class="hidden md:flex items-center gap-stack-lg">
             <a href="{{ url('/#home') }}" @click="activeSection = 'home'" :class="activeSection === 'home' ? 'text-primary font-bold border-b-2 border-secondary' : 'text-on-surface-variant hover:text-secondary'" class="font-body-md text-body-md cursor-pointer active:scale-95 transition-colors duration-200">Beranda</a>

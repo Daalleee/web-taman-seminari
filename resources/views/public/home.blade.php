@@ -21,27 +21,28 @@ document.addEventListener('DOMContentLoaded',()=>{
 </script>
 
 <!-- HERO -->
-<section id="home" class="relative min-h-[85vh] flex items-center overflow-hidden bg-surface">
+<section id="home" class="relative min-h-screen flex items-center overflow-hidden bg-surface">
     @php $firstBanner = $banners->first(); @endphp
     @if($firstBanner && $firstBanner->image_path)
     <div class="absolute inset-0 z-0">
-        <div class="w-full h-full bg-cover bg-center opacity-40" style="background-image: url('{{ asset('storage/'.$firstBanner->image_path) }}')"></div>
-        <div class="absolute inset-0 bg-gradient-to-r from-surface via-surface/80 to-transparent"></div>
+        <div class="w-full h-full bg-cover bg-center scale-105 transition-transform duration-[20s]" style="background-image: url('{{ asset('storage/'.$firstBanner->image_path) }}')"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-primary/85 via-primary/50 to-primary/20"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent"></div>
     </div>
     @endif
     <div class="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-gutter grid grid-cols-1 md:grid-cols-2 gap-stack-lg items-center w-full">
         <div class="fade-in">
-            <h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-stack-md leading-tight">
+            <h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white mb-stack-md leading-tight drop-shadow-lg">
                 {{ $firstBanner->title ?? 'Membentuk Hati yang Beriman & Pikiran yang Cemerlang' }}
             </h1>
-            <p class="font-body-lg text-body-lg text-on-surface-variant mb-stack-lg max-w-[540px]">
+            <p class="font-body-lg text-body-lg text-white/80 mb-stack-lg max-w-[540px] drop-shadow">
                 {{ $settings['about_text'] ?? 'Di Taman Seminari TK, kami menanamkan nilai-nilai Kristiani yang mendalam dengan pendekatan pendidikan anak usia dini yang modern dan penuh kasih.' }}
             </p>
             <div class="flex flex-wrap gap-4">
-                <a href="#about" class="bg-primary text-on-primary px-8 py-4 rounded-xl font-label-md text-label-md hover:bg-primary-container transition-all active:scale-95 shadow-md">
+                <a href="#about" class="bg-white text-primary px-8 py-4 rounded-xl font-label-md text-label-md hover:shadow-xl hover:scale-[1.02] transition-all active:scale-95 shadow-lg">
                     Selengkapnya
                 </a>
-                <a href="#contact" class="border-2 border-secondary text-secondary px-8 py-4 rounded-xl font-label-md text-label-md hover:bg-secondary/5 transition-all active:scale-95">
+                <a href="#contact" class="bg-white/10 backdrop-blur-sm border border-white/40 text-white px-8 py-4 rounded-xl font-label-md text-label-md hover:bg-white/20 transition-all active:scale-95">
                     Hubungi Kami
                 </a>
             </div>
