@@ -7,6 +7,8 @@ use App\Http\Controllers\PublicController;
 
 // Public Routes
 Route::get('/', [PublicController::class, 'home'])->name('home');
+Route::get('/berita/{news}', [PublicController::class, 'newsDetail'])->name('news.show');
+Route::get('/kegiatan/{activity}', [PublicController::class, 'activityDetail'])->name('activity.show');
 
 // Auth Routes
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login')->middleware('guest');

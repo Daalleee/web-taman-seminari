@@ -1,167 +1,142 @@
 <!DOCTYPE html>
-<html lang="id">
+<html class="light" lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Taman Seminari')</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Clean & Modern Fonts: Outfit for headings, Nunito for body -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Nunito', sans-serif; background-color: #FAFAFA; }
-        h1, h2, h3, h4, h5, h6, .font-heading { font-family: 'Outfit', sans-serif; }
-        html { scroll-behavior: smooth; }
-        
-        /* Subtle Motif Backgrounds */
-        .bg-grid-pattern {
-            background-image: radial-gradient(#CBD5E1 1px, transparent 1px);
-            background-size: 24px 24px;
-        }
-        .bg-dots-pattern {
-            background-image: radial-gradient(#94A3B8 2px, transparent 2px);
-            background-size: 30px 30px;
-        }
-        
-        /* Smooth interactions */
-        .hover-lift {
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .hover-lift:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-    </style>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>@yield('title', 'Taman Seminari TK')</title>
+@vite(['resources/css/app.css', 'resources/js/app.js'])
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<style>
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; display: inline-block; line-height: 1; }
+    .scrolled-nav { background-color: rgba(251, 249, 248, 0.95); backdrop-filter: blur(8px); }
+    .glass-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(8px); border: 1px solid rgba(0, 30, 64, 0.05); }
+    .sacred-gradient { background: linear-gradient(135deg, #001e40 0%, #003366 100%); }
+    html { scroll-behavior: smooth; }
+</style>
 </head>
-<body class="text-slate-700 antialiased overflow-x-hidden selection:bg-indigo-100 selection:text-indigo-900">
+<body class="bg-background text-on-surface selection:bg-secondary-fixed selection:text-on-secondary-fixed font-body-md">
 
-    <!-- Glassmorphism Navigation -->
-    <nav x-data="{ scrolled: false, mobileMenu: false }" @scroll.window="scrolled = (window.pageYOffset > 20)" 
-         class="fixed w-full z-50 transition-all duration-500 top-0 pt-4 px-4">
-        <div class="max-w-6xl mx-auto">
-            <div :class="{'bg-white/90 backdrop-blur-xl shadow-lg border border-slate-100 rounded-full px-6 py-3': scrolled, 'bg-transparent px-2 py-4': !scrolled}" class="flex justify-between items-center transition-all duration-500">
-                
-                <!-- Logo -->
-                <a href="#home" class="flex items-center gap-3 group">
-                    <div class="w-10 h-10 bg-indigo-600 rounded-full flex items-center justify-center text-white font-heading font-bold text-xl transition-transform group-hover:scale-105 shadow-sm">
-                        TS
-                    </div>
-                    <span :class="{'text-slate-800': scrolled, 'text-white drop-shadow-sm': !scrolled}" class="font-heading font-bold text-xl tracking-tight transition-colors">Taman Seminari</span>
+<nav x-data="{ activeSection: 'home', mobileMenu: false, scrolled: false }" @scroll.window="scrolled = (window.pageYOffset > 20)"
+     class="w-full top-0 sticky z-50 bg-surface dark:bg-surface-container-low border-b border-primary/10 transition-all duration-300"
+     :class="{'scrolled-nav shadow-md': scrolled}">
+    <div class="flex justify-between items-center max-w-container-max mx-auto px-margin-mobile md:px-gutter h-20">
+        <a href="{{ url('/#home') }}" class="text-2xl font-bold tracking-tight" style="color: #001e40; font-family: 'Source Serif 4', serif;">Taman Seminari</a>
+        <div class="hidden md:flex items-center gap-stack-lg">
+            <a href="{{ url('/#home') }}" @click="activeSection = 'home'" :class="activeSection === 'home' ? 'text-primary font-bold border-b-2 border-secondary' : 'text-on-surface-variant hover:text-secondary'" class="font-body-md text-body-md cursor-pointer active:scale-95 transition-colors duration-200">Beranda</a>
+            <a href="{{ url('/#about') }}" @click="activeSection = 'about'" :class="activeSection === 'about' ? 'text-primary font-bold border-b-2 border-secondary' : 'text-on-surface-variant hover:text-secondary'" class="font-body-md text-body-md cursor-pointer active:scale-95 transition-colors duration-200">Tentang</a>
+            <a href="{{ url('/#news') }}" @click="activeSection = 'news'" :class="activeSection === 'news' ? 'text-primary font-bold border-b-2 border-secondary' : 'text-on-surface-variant hover:text-secondary'" class="font-body-md text-body-md cursor-pointer active:scale-95 transition-colors duration-200">Berita</a>
+            <a href="{{ url('/#activities') }}" @click="activeSection = 'activities'" :class="activeSection === 'activities' ? 'text-primary font-bold border-b-2 border-secondary' : 'text-on-surface-variant hover:text-secondary'" class="font-body-md text-body-md cursor-pointer active:scale-95 transition-colors duration-200">Kegiatan</a>
+            <a href="{{ url('/#gallery') }}" @click="activeSection = 'gallery'" :class="activeSection === 'gallery' ? 'text-primary font-bold border-b-2 border-secondary' : 'text-on-surface-variant hover:text-secondary'" class="font-body-md text-body-md cursor-pointer active:scale-95 transition-colors duration-200">Galeri</a>
+            <a href="{{ url('/#faq') }}" @click="activeSection = 'faq'" :class="activeSection === 'faq' ? 'text-primary font-bold border-b-2 border-secondary' : 'text-on-surface-variant hover:text-secondary'" class="font-body-md text-body-md cursor-pointer active:scale-95 transition-colors duration-200">FAQ</a>
+            <a href="{{ url('/#contact') }}" @click="activeSection = 'contact'" :class="activeSection === 'contact' ? 'text-primary font-bold border-b-2 border-secondary' : 'text-on-surface-variant hover:text-secondary'" class="font-body-md text-body-md cursor-pointer active:scale-95 transition-colors duration-200">Kontak</a>
+            @auth
+                <a href="{{ route('admin.dashboard') }}" class="bg-primary text-on-primary px-6 py-2.5 rounded-full font-label-md text-label-md hover:bg-primary-container transition-all active:scale-95 shadow-sm">Dashboard</a>
+            @else
+                <a href="{{ route('login') }}" class="bg-primary text-on-primary px-6 py-2.5 rounded-full font-label-md text-label-md hover:bg-primary-container transition-all active:scale-95 shadow-sm">Login Admin</a>
+            @endauth
+        </div>
+        <button @click="mobileMenu = !mobileMenu" class="md:hidden text-primary p-2">
+            <span class="material-symbols-outlined" x-show="!mobileMenu">menu</span>
+            <span class="material-symbols-outlined" x-show="mobileMenu" style="display: none;">close</span>
+        </button>
+    </div>
+    <div x-show="mobileMenu" x-transition class="md:hidden bg-white border-t border-primary/10" style="display: none;">
+        <div class="px-margin-mobile py-stack-md space-y-stack-sm">
+            <a href="{{ url('/#home') }}" @click="mobileMenu = false" class="block font-label-md text-label-md text-primary font-bold py-2">Beranda</a>
+            <a href="{{ url('/#about') }}" @click="mobileMenu = false" class="block font-label-md text-label-md text-on-surface-variant hover:text-secondary py-2">Tentang</a>
+            <a href="{{ url('/#news') }}" @click="mobileMenu = false" class="block font-label-md text-label-md text-on-surface-variant hover:text-secondary py-2">Berita</a>
+            <a href="{{ url('/#activities') }}" @click="mobileMenu = false" class="block font-label-md text-label-md text-on-surface-variant hover:text-secondary py-2">Kegiatan</a>
+            <a href="{{ url('/#gallery') }}" @click="mobileMenu = false" class="block font-label-md text-label-md text-on-surface-variant hover:text-secondary py-2">Galeri</a>
+            <a href="{{ url('/#faq') }}" @click="mobileMenu = false" class="block font-label-md text-label-md text-on-surface-variant hover:text-secondary py-2">FAQ</a>
+            <a href="{{ url('/#contact') }}" @click="mobileMenu = false" class="block font-label-md text-label-md text-on-surface-variant hover:text-secondary py-2">Kontak</a>
+            <div class="pt-stack-sm border-t border-outline-variant/30">
+                @auth
+                    <a href="{{ route('admin.dashboard') }}" class="block text-center bg-primary text-on-primary px-6 py-2.5 rounded-full font-label-md">Dashboard</a>
+                @else
+                    <a href="{{ route('login') }}" class="block text-center bg-primary text-on-primary px-6 py-2.5 rounded-full font-label-md">Login Admin</a>
+                @endauth
+            </div>
+        </div>
+    </div>
+</nav>
+
+<main>
+    @yield('content')
+</main>
+
+<footer class="bg-primary w-full">
+    <div class="py-8 px-margin-mobile md:px-gutter max-w-container-max mx-auto flex flex-col md:flex-row justify-between gap-6">
+        <div class="max-w-sm">
+            <div class="font-headline-sm text-headline-sm text-on-primary mb-3">{{ $settings['school_name'] ?? 'Taman Seminari TK' }}</div>
+            <p class="font-body-md text-body-md text-on-primary/80 mb-4 leading-relaxed">
+                Mendidik anak dengan kasih, membimbing mereka dengan iman, dan mempersiapkan mereka untuk masa depan yang gemilang.
+            </p>
+            <div class="flex gap-3">
+                <a class="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center hover:bg-secondary-fixed hover:text-on-secondary-fixed transition-colors" href="#">
+                    <span class="material-symbols-outlined text-base">public</span>
                 </a>
-                
-                <!-- Desktop Menu -->
-                <div class="hidden md:flex items-center transition-all duration-300 space-x-2 px-4 py-1.5 rounded-full border" :class="{'bg-transparent border-transparent': scrolled, 'bg-white/10 backdrop-blur-md border-white/20 shadow-sm': !scrolled}">
-                    <a href="#home" :class="{'text-slate-600 hover:text-indigo-600': scrolled, 'text-white/95 hover:text-white drop-shadow-sm': !scrolled}" class="font-semibold transition-all px-3 py-2 text-sm hover:-translate-y-0.5 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:transition-all hover:after:w-full" :class="{'after:bg-indigo-600': scrolled, 'after:bg-white': !scrolled}">Beranda</a>
-                    <a href="#about" :class="{'text-slate-600 hover:text-indigo-600': scrolled, 'text-white/95 hover:text-white drop-shadow-sm': !scrolled}" class="font-semibold transition-all px-3 py-2 text-sm hover:-translate-y-0.5 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:transition-all hover:after:w-full" :class="{'after:bg-indigo-600': scrolled, 'after:bg-white': !scrolled}">Tentang</a>
-                    <a href="#news" :class="{'text-slate-600 hover:text-indigo-600': scrolled, 'text-white/95 hover:text-white drop-shadow-sm': !scrolled}" class="font-semibold transition-all px-3 py-2 text-sm hover:-translate-y-0.5 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:transition-all hover:after:w-full" :class="{'after:bg-indigo-600': scrolled, 'after:bg-white': !scrolled}">Berita</a>
-                    <a href="#activities" :class="{'text-slate-600 hover:text-indigo-600': scrolled, 'text-white/95 hover:text-white drop-shadow-sm': !scrolled}" class="font-semibold transition-all px-3 py-2 text-sm hover:-translate-y-0.5 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:transition-all hover:after:w-full" :class="{'after:bg-indigo-600': scrolled, 'after:bg-white': !scrolled}">Kegiatan</a>
-                    <a href="#gallery" :class="{'text-slate-600 hover:text-indigo-600': scrolled, 'text-white/95 hover:text-white drop-shadow-sm': !scrolled}" class="font-semibold transition-all px-3 py-2 text-sm hover:-translate-y-0.5 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:transition-all hover:after:w-full" :class="{'after:bg-indigo-600': scrolled, 'after:bg-white': !scrolled}">Galeri</a>
-                    <a href="#faq" :class="{'text-slate-600 hover:text-indigo-600': scrolled, 'text-white/95 hover:text-white drop-shadow-sm': !scrolled}" class="font-semibold transition-all px-3 py-2 text-sm hover:-translate-y-0.5 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:transition-all hover:after:w-full" :class="{'after:bg-indigo-600': scrolled, 'after:bg-white': !scrolled}">FAQ</a>
-                    <a href="#contact" :class="{'text-slate-600 hover:text-indigo-600': scrolled, 'text-white/95 hover:text-white drop-shadow-sm': !scrolled}" class="font-semibold transition-all px-3 py-2 text-sm hover:-translate-y-0.5 relative after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:transition-all hover:after:w-full" :class="{'after:bg-indigo-600': scrolled, 'after:bg-white': !scrolled}">Kontak</a>
-                </div>
-
-                <!-- Action Button -->
-                <div class="hidden md:flex items-center">
-                    @auth
-                        <a href="{{ route('admin.dashboard') }}" :class="{'bg-indigo-50 text-indigo-600 hover:bg-indigo-100': scrolled, 'bg-white text-indigo-600 hover:bg-slate-50': !scrolled}" class="px-6 py-2.5 rounded-full font-bold text-sm transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5">Dashboard Admin</a>
-                    @else
-                        <a href="{{ route('login') }}" :class="{'bg-indigo-600 text-white hover:bg-indigo-700': scrolled, 'bg-white text-slate-800 hover:bg-slate-50': !scrolled}" class="px-6 py-2.5 rounded-full font-bold text-sm transition-all shadow-sm hover:shadow-md hover:-translate-y-0.5">Login Admin</a>
-                    @endauth
-                </div>
-
-                <!-- Mobile Menu Toggle -->
-                <div class="md:hidden flex items-center">
-                    <button @click="mobileMenu = !mobileMenu" :class="{'text-slate-800': scrolled, 'text-white': !scrolled}" class="focus:outline-none p-2 bg-black/5 rounded-full backdrop-blur-sm">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" x-show="!mobileMenu"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" x-show="mobileMenu" style="display: none;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                    </button>
-                </div>
-            </div>
-            
-            <!-- Mobile Menu Dropdown -->
-            <div x-show="mobileMenu" x-transition class="md:hidden mt-4 bg-white/95 backdrop-blur-xl border border-slate-100 rounded-3xl overflow-hidden shadow-xl" style="display: none;">
-                <div class="px-4 py-6 space-y-2">
-                    <a href="#home" @click="mobileMenu = false" class="block px-4 py-3 text-base font-semibold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-colors">Beranda</a>
-                    <a href="#about" @click="mobileMenu = false" class="block px-4 py-3 text-base font-semibold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-colors">Tentang Kami</a>
-                    <a href="#news" @click="mobileMenu = false" class="block px-4 py-3 text-base font-semibold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-colors">Berita</a>
-                    <a href="#activities" @click="mobileMenu = false" class="block px-4 py-3 text-base font-semibold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-colors">Kegiatan</a>
-                    <a href="#gallery" @click="mobileMenu = false" class="block px-4 py-3 text-base font-semibold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-colors">Galeri</a>
-                    <a href="#faq" @click="mobileMenu = false" class="block px-4 py-3 text-base font-semibold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-colors">FAQ</a>
-                    <a href="#contact" @click="mobileMenu = false" class="block px-4 py-3 text-base font-semibold text-slate-700 hover:bg-indigo-50 hover:text-indigo-600 rounded-xl transition-colors">Kontak</a>
-                    
-                    <div class="pt-4 mt-2 border-t border-slate-100">
-                        @auth
-                            <a href="{{ route('admin.dashboard') }}" class="block text-center px-4 py-3 text-base font-bold text-white bg-indigo-600 rounded-xl">Dashboard Admin</a>
-                        @else
-                            <a href="{{ route('login') }}" class="block text-center px-4 py-3 text-base font-bold text-white bg-indigo-600 rounded-xl">Login Admin</a>
-                        @endauth
-                    </div>
-                </div>
+                <a class="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center hover:bg-secondary-fixed hover:text-on-secondary-fixed transition-colors" href="#">
+                    <span class="material-symbols-outlined text-base">alternate_email</span>
+                </a>
+                <a class="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center hover:bg-secondary-fixed hover:text-on-secondary-fixed transition-colors" href="#">
+                    <span class="material-symbols-outlined text-base">call</span>
+                </a>
             </div>
         </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main>
-        @yield('content')
-    </main>
-
-    <!-- Colorful Footer -->
-    <footer class="bg-slate-900 pt-16 pb-8 relative overflow-hidden text-slate-300">
-        <!-- Subtle motif -->
-        <div class="absolute top-0 right-0 w-64 h-64 bg-grid-pattern opacity-10 pointer-events-none rounded-bl-full"></div>
-        
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 mb-12">
-                
-                <div class="md:col-span-5">
-                    <div class="flex items-center gap-3 mb-6">
-                        <div class="w-10 h-10 bg-indigo-500 rounded-xl flex items-center justify-center text-white font-heading font-bold text-lg shadow-lg">TS</div>
-                        <span class="font-heading font-bold text-2xl text-white">{{ $settings['school_name'] ?? 'Taman Seminari' }}</span>
-                    </div>
-                    <p class="text-slate-400 leading-relaxed pr-8">Menyediakan lingkungan yang kondusif, bersih, dan interaktif bagi tumbuh kembang optimal anak usia dini.</p>
-                </div>
-                
-                <div class="md:col-span-4">
-                    <h4 class="font-heading font-semibold text-white mb-6 uppercase tracking-wider text-sm">Informasi Kontak</h4>
-                    <ul class="space-y-4 text-slate-400">
-                        @if(!empty($settings['address']))
-                        <li class="flex items-start gap-3">
-                            <div class="bg-slate-800 p-2 rounded-lg shrink-0">
-                                <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                            </div>
-                            <span class="text-sm leading-relaxed mt-1">{{ $settings['address'] }}</span>
-                        </li>
-                        @endif
-                        @if(!empty($settings['phone']))
-                        <li class="flex items-center gap-3">
-                            <div class="bg-slate-800 p-2 rounded-lg shrink-0">
-                                <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-                            </div>
-                            <span class="text-sm">{{ $settings['phone'] }}</span>
-                        </li>
-                        @endif
-                    </ul>
-                </div>
-
-                <div class="md:col-span-3">
-                    <h4 class="font-heading font-semibold text-white mb-6 uppercase tracking-wider text-sm">Tautan Cepat</h4>
-                    <ul class="space-y-3">
-                        <li><a href="#home" class="text-slate-400 hover:text-indigo-400 text-sm transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span> Beranda</a></li>
-                        <li><a href="#about" class="text-slate-400 hover:text-indigo-400 text-sm transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span> Tentang Kami</a></li>
-                        <li><a href="#activities" class="text-slate-400 hover:text-indigo-400 text-sm transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span> Kegiatan & Berita</a></li>
-                        <li><a href="#gallery" class="text-slate-400 hover:text-indigo-400 text-sm transition-colors flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span> Galeri Dokumentasi</a></li>
-                    </ul>
-                </div>
+        <div class="grid grid-cols-2 gap-6">
+            <div>
+                <h5 class="font-label-md text-label-md text-secondary-fixed uppercase mb-3 tracking-widest">Navigasi</h5>
+                <ul class="space-y-2">
+                    <li><a href="{{ url('/#home') }}" class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed transition-colors">Beranda</a></li>
+                    <li><a href="{{ url('/#about') }}" class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed transition-colors">Tentang</a></li>
+                    <li><a href="{{ url('/#news') }}" class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed transition-colors">Berita</a></li>
+                    <li><a href="{{ url('/#activities') }}" class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed transition-colors">Kegiatan</a></li>
+                    <li><a href="{{ url('/#gallery') }}" class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed transition-colors">Galeri</a></li>
+                    <li><a href="{{ url('/#faq') }}" class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed transition-colors">FAQ</a></li>
+                    <li><a href="{{ url('/#contact') }}" class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed transition-colors">Kontak</a></li>
+                </ul>
             </div>
-            
-            <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-                <p class="text-sm text-slate-500">&copy; {{ date('Y') }} {{ $settings['school_name'] ?? 'Taman Seminari' }}. Hak Cipta Dilindungi.</p>
+            <div>
+                <h5 class="font-label-md text-label-md text-secondary-fixed uppercase mb-3 tracking-widest">Kontak</h5>
+                @if(!empty($settings['address']))
+                <p class="font-body-md text-body-md text-on-primary/80 mb-2">{{ $settings['address'] }}</p>
+                @endif
+                @if(!empty($settings['phone']))
+                <p class="font-body-md text-body-md text-on-primary/80 mb-2">{{ $settings['phone'] }}</p>
+                @endif
+                @if(!empty($settings['email']))
+                <p class="font-body-md text-body-md text-on-primary/80">{{ $settings['email'] }}</p>
+                @endif
             </div>
         </div>
-    </footer>
+    </div>
+    <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter py-4 border-t border-white/10 text-center">
+        <p class="font-body-md text-body-md text-on-primary/60">&copy; {{ date('Y') }} {{ $settings['school_name'] ?? 'Taman Seminari TK' }}.</p>
+    </div>
+</footer>
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const nav = document.querySelector('nav[x-data]');
+    if (!nav) return;
+    const sections = document.querySelectorAll('section[id]');
+    if (!sections.length) return;
+    const observer = new IntersectionObserver((entries) => {
+        let maxRatio = 0, maxId = 'home';
+        entries.forEach(e => {
+            if (e.intersectionRatio > maxRatio) {
+                maxRatio = e.intersectionRatio;
+                maxId = e.target.id;
+            }
+        });
+        if (maxRatio > 0 && nav.__x) nav.__x.$data.activeSection = maxId;
+    }, { threshold: [0, 0.2, 0.4, 0.6, 0.8, 1], rootMargin: '-100px 0px -40% 0px' });
+    sections.forEach(s => observer.observe(s));
+});
+</script>
 </body>
 </html>

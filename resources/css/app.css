@@ -2,8 +2,109 @@
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
+@source "../views";
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-headline-lg: '"Source Serif 4"', serif;
+    --font-headline-lg-mobile: '"Source Serif 4"', serif;
+    --font-headline-md: '"Source Serif 4"', serif;
+    --font-headline-sm: '"Source Serif 4"', serif;
+    --font-label-md: 'Plus Jakarta Sans', sans-serif;
+    --font-body-lg: 'Plus Jakarta Sans', sans-serif;
+    --font-body-md: 'Plus Jakarta Sans', sans-serif;
+    --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+
+    --color-primary: #001e40;
+    --color-on-primary: #ffffff;
+    --color-primary-container: #003366;
+    --color-on-primary-container: #799dd6;
+    --color-primary-fixed: #d5e3ff;
+    --color-primary-fixed-dim: #a7c8ff;
+    --color-on-primary-fixed: #001b3c;
+    --color-on-primary-fixed-variant: #1f477b;
+    --color-inverse-primary: #a7c8ff;
+
+    --color-secondary: #735c00;
+    --color-on-secondary: #ffffff;
+    --color-secondary-container: #fed65b;
+    --color-on-secondary-container: #745c00;
+    --color-secondary-fixed: #ffe088;
+    --color-secondary-fixed-dim: #e9c349;
+    --color-on-secondary-fixed: #241a00;
+    --color-on-secondary-fixed-variant: #574500;
+
+    --color-tertiary: #1c1f20;
+    --color-tertiary-container: #313435;
+    --color-tertiary-fixed: #e1e3e4;
+    --color-tertiary-fixed-dim: #c5c7c8;
+    --color-on-tertiary: #ffffff;
+    --color-on-tertiary-container: #9a9c9d;
+    --color-on-tertiary-fixed: #191c1d;
+    --color-on-tertiary-fixed-variant: #454748;
+
+    --color-surface: #fbf9f8;
+    --color-surface-bright: #fbf9f8;
+    --color-surface-dim: #dbd9d9;
+    --color-surface-container-lowest: #ffffff;
+    --color-surface-container-low: #f5f3f3;
+    --color-surface-container: #efeded;
+    --color-surface-container-high: #eae8e7;
+    --color-surface-container-highest: #e4e2e2;
+    --color-surface-variant: #e4e2e2;
+    --color-on-surface: #1b1c1c;
+    --color-on-surface-variant: #43474f;
+    --color-inverse-surface: #303030;
+    --color-inverse-on-surface: #f2f0f0;
+
+    --color-outline: #737780;
+    --color-outline-variant: #c3c6d1;
+
+    --color-error: #ba1a1a;
+    --color-on-error: #ffffff;
+    --color-error-container: #ffdad6;
+    --color-on-error-container: #93000a;
+
+    --color-background: #fbf9f8;
+    --color-on-background: #1b1c1c;
+
+    --spacing-container-max: 1200px;
+    --spacing-margin-mobile: 16px;
+    --spacing-stack-lg: 32px;
+    --spacing-section-gap: 80px;
+    --spacing-gutter: 24px;
+    --spacing-stack-md: 16px;
+    --spacing-stack-sm: 8px;
+
+    --font-size-headline-lg: 36px;
+    --font-size-headline-lg-mobile: 28px;
+    --font-size-headline-md: 28px;
+    --font-size-headline-sm: 24px;
+    --font-size-label-md: 14px;
+    --font-size-body-lg: 18px;
+    --font-size-body-md: 16px;
 }
+
+@utility text-headline-lg {
+    font-size: var(--font-size-headline-lg);
+}
+@utility text-headline-lg-mobile {
+    font-size: var(--font-size-headline-lg-mobile);
+}
+@utility text-headline-md {
+    font-size: var(--font-size-headline-md);
+}
+@utility text-headline-sm {
+    font-size: var(--font-size-headline-sm);
+}
+@utility text-label-md {
+    font-size: var(--font-size-label-md);
+}
+@utility text-body-lg {
+    font-size: var(--font-size-body-lg);
+}
+@utility text-body-md {
+    font-size: var(--font-size-body-md);
+}
+
+.text-headline-lg { font-size: var(--font-size-headline-lg); }
+.text-headline-md { font-size: var(--font-size-headline-md); }
