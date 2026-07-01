@@ -9,7 +9,7 @@
             <h2 class="text-lg font-semibold text-slate-800">Kelola Berita</h2>
             <p class="text-sm text-slate-500">Publikasikan berita dan pengumuman terbaru.</p>
         </div>
-        <button @click="openModal = true" class="px-5 py-2.5 bg-indigo-600 text-white rounded-xl font-medium hover:bg-indigo-700 transition-colors shadow-sm flex items-center gap-2">
+        <button @click="openModal = true" class="px-5 py-2.5 bg-primary text-white rounded-xl font-medium hover:bg-primary-container transition-colors shadow-sm flex items-center gap-2">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
             Tambah Berita
         </button>
@@ -39,8 +39,8 @@
                     <td class="py-4 px-6 text-slate-500 text-sm">{{ $item->published_at ? $item->published_at->format('Y-m-d') : '-' }}</td>
                     <td class="py-4 px-6 text-right">
                         <div class="flex items-center justify-end gap-2">
-                            <button @click="activeItem = {{ json_encode($item) }}; viewModal = true" class="text-teal-500 hover:bg-teal-50 px-3 py-1.5 rounded-lg text-sm font-medium">Lihat</button>
-                            <button @click="activeItem = {{ json_encode($item) }}; editModal = true" class="text-indigo-500 hover:bg-indigo-50 px-3 py-1.5 rounded-lg text-sm font-medium">Edit</button>
+                            <button @click="activeItem = {{ json_encode($item) }}; viewModal = true" class="text-secondary hover:bg-secondary/10 px-3 py-1.5 rounded-lg text-sm font-medium">Lihat</button>
+                            <button @click="activeItem = {{ json_encode($item) }}; editModal = true" class="text-secondary hover:bg-secondary/10 px-3 py-1.5 rounded-lg text-sm font-medium">Edit</button>
                             <form action="{{ route('admin.news.delete', $item) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus berita ini?');">@csrf @method('DELETE')
                                 <button class="text-red-500 hover:bg-red-50 px-3 py-1.5 rounded-lg text-sm font-medium">Hapus</button>
                             </form>
@@ -69,11 +69,11 @@
                             <div><label class="block text-sm font-medium text-slate-700 mb-1">Judul</label><input type="text" name="title" required class="block w-full px-4 py-2.5 border border-slate-200 rounded-xl sm:text-sm bg-slate-50" placeholder="Masukkan judul berita"></div>
                             <div><label class="block text-sm font-medium text-slate-700 mb-1">Isi Berita</label><textarea name="content" rows="4" required class="block w-full px-4 py-2.5 border border-slate-200 rounded-xl sm:text-sm bg-slate-50" placeholder="Tulis isi berita..."></textarea></div>
                             <div><label class="block text-sm font-medium text-slate-700 mb-1">Tanggal Terbit</label><input type="date" name="published_at" value="{{ date('Y-m-d') }}" required class="block w-full px-4 py-2.5 border border-slate-200 rounded-xl sm:text-sm bg-slate-50"></div>
-                            <div><label class="block text-sm font-medium text-slate-700 mb-1">Gambar Sampul (Opsional)</label><input type="file" name="image" accept="image/*" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-indigo-50 file:text-indigo-700 border border-slate-200 rounded-xl"></div>
+                            <div><label class="block text-sm font-medium text-slate-700 mb-1">Gambar Sampul (Opsional)</label><input type="file" name="image" accept="image/*" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-primary/10 file:text-primary border border-slate-200 rounded-xl"></div>
                         </div>
                         <div class="px-6 py-4 bg-slate-50 flex justify-end gap-3">
                             <button type="button" @click="openModal=false" class="px-4 py-2 text-sm text-slate-600 hover:bg-slate-200 rounded-xl">Batal</button>
-                            <button type="submit" class="px-4 py-2 text-sm text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl shadow-sm">Terbitkan</button>
+                            <button type="submit" class="px-4 py-2 text-sm text-white bg-primary hover:bg-primary-container rounded-xl shadow-sm">Terbitkan</button>
                         </div>
                     </form>
                 </div>
@@ -99,11 +99,11 @@
                                 <!-- Kita gunakan format yang benar Y-m-d -->
                                 <input type="date" name="published_at" :value="activeItem.published_at ? activeItem.published_at.substring(0,10) : ''" required class="block w-full px-4 py-2.5 border border-slate-200 rounded-xl sm:text-sm bg-slate-50">
                             </div>
-                            <div><label class="block text-sm font-medium text-slate-700 mb-1">Ganti Gambar (Opsional)</label><input type="file" name="image" accept="image/*" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-indigo-50 file:text-indigo-700 border border-slate-200 rounded-xl"></div>
+                            <div><label class="block text-sm font-medium text-slate-700 mb-1">Ganti Gambar (Opsional)</label><input type="file" name="image" accept="image/*" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-primary/10 file:text-primary border border-slate-200 rounded-xl"></div>
                         </div>
                         <div class="px-6 py-4 bg-slate-50 flex justify-end gap-3">
                             <button type="button" @click="editModal=false" class="px-4 py-2 text-sm text-slate-600 hover:bg-slate-200 rounded-xl">Batal</button>
-                            <button type="submit" class="px-4 py-2 text-sm text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl shadow-sm">Simpan Perubahan</button>
+                            <button type="submit" class="px-4 py-2 text-sm text-white bg-primary hover:bg-primary-container rounded-xl shadow-sm">Simpan Perubahan</button>
                         </div>
                     </form>
                 </div>
@@ -122,7 +122,7 @@
                     </div>
                     <div class="p-6">
                         <h3 class="text-xl font-bold text-slate-800 mb-2" x-text="activeItem.title"></h3>
-                        <p class="text-sm text-indigo-500 font-medium mb-4" x-text="activeItem.published_at ? activeItem.published_at.substring(0,10) : ''"></p>
+                        <p class="text-sm text-secondary font-medium mb-4" x-text="activeItem.published_at ? activeItem.published_at.substring(0,10) : ''"></p>
                         <p class="text-slate-600 whitespace-pre-wrap" x-text="activeItem.content"></p>
                     </div>
                     <div class="px-6 py-4 bg-slate-50 border-t border-slate-100 flex justify-end">

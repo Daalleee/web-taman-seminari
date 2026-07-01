@@ -10,7 +10,7 @@
             <h2 class="text-lg font-semibold text-slate-800">Kelola FAQ</h2>
             <p class="text-sm text-slate-500">Pertanyaan yang sering ditanyakan oleh pengunjung.</p>
         </div>
-        <button @click="openModal = true" class="px-5 py-2.5 bg-indigo-600 text-white rounded-xl font-medium hover:bg-indigo-700 transition-colors shadow-sm flex items-center gap-2">
+        <button @click="openModal = true" class="px-5 py-2.5 bg-primary text-white rounded-xl font-medium hover:bg-primary-container transition-colors shadow-sm flex items-center gap-2">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
             Tambah FAQ
         </button>
@@ -32,7 +32,7 @@
                     <td class="py-4 px-6 text-slate-500 text-sm max-w-xs truncate">{{ $faq->answer }}</td>
                     <td class="py-4 px-6 text-right">
                         <div class="flex items-center justify-end gap-2">
-                            <button @click="activeFaq = {{ json_encode($faq) }}; editModal = true" class="text-indigo-500 hover:bg-indigo-50 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors">Edit</button>
+                            <button @click="activeFaq = {{ json_encode($faq) }}; editModal = true" class="text-secondary hover:bg-secondary/10 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors">Edit</button>
                             <form action="{{ route('admin.faqs.delete', $faq) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus FAQ ini?');">
                                 @csrf @method('DELETE')
                                 <button class="text-red-500 hover:bg-red-50 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors">Hapus</button>
@@ -62,16 +62,16 @@
                         <div class="px-6 py-5 space-y-4">
                             <div>
                                 <label class="block text-sm font-medium text-slate-700 mb-1">Pertanyaan</label>
-                                <input type="text" name="question" required class="block w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 sm:text-sm bg-slate-50 focus:bg-white transition-colors" placeholder="Contoh: Bagaimana cara mendaftar?">
+                                <input type="text" name="question" required class="block w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-secondary/30 sm:text-sm bg-slate-50 focus:bg-white transition-colors" placeholder="Contoh: Bagaimana cara mendaftar?">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-slate-700 mb-1">Jawaban</label>
-                                <textarea name="answer" rows="3" required class="block w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 sm:text-sm bg-slate-50 focus:bg-white transition-colors" placeholder="Tuliskan jawaban..."></textarea>
+                                <textarea name="answer" rows="3" required class="block w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-secondary/30 sm:text-sm bg-slate-50 focus:bg-white transition-colors" placeholder="Tuliskan jawaban..."></textarea>
                             </div>
                         </div>
                         <div class="px-6 py-4 bg-slate-50 flex justify-end gap-3">
                             <button type="button" @click="openModal = false" class="px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-200 rounded-xl">Batal</button>
-                            <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl shadow-sm">Simpan</button>
+                            <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-primary hover:bg-primary-container rounded-xl shadow-sm">Simpan</button>
                         </div>
                     </form>
                 </div>
@@ -94,16 +94,16 @@
                         <div class="px-6 py-5 space-y-4">
                             <div>
                                 <label class="block text-sm font-medium text-slate-700 mb-1">Pertanyaan</label>
-                                <input type="text" name="question" :value="activeFaq.question" required class="block w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 sm:text-sm bg-slate-50 focus:bg-white transition-colors">
+                                <input type="text" name="question" :value="activeFaq.question" required class="block w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-secondary/30 sm:text-sm bg-slate-50 focus:bg-white transition-colors">
                             </div>
                             <div>
                                 <label class="block text-sm font-medium text-slate-700 mb-1">Jawaban</label>
-                                <textarea name="answer" rows="3" :value="activeFaq.answer" x-text="activeFaq.answer" required class="block w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-indigo-500 sm:text-sm bg-slate-50 focus:bg-white transition-colors"></textarea>
+                                <textarea name="answer" rows="3" :value="activeFaq.answer" x-text="activeFaq.answer" required class="block w-full px-4 py-2.5 border border-slate-200 rounded-xl focus:ring-2 focus:ring-secondary/30 sm:text-sm bg-slate-50 focus:bg-white transition-colors"></textarea>
                             </div>
                         </div>
                         <div class="px-6 py-4 bg-slate-50 flex justify-end gap-3">
                             <button type="button" @click="editModal = false" class="px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-200 rounded-xl">Batal</button>
-                            <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl shadow-sm">Simpan Perubahan</button>
+                            <button type="submit" class="px-4 py-2 text-sm font-medium text-white bg-primary hover:bg-primary-container rounded-xl shadow-sm">Simpan Perubahan</button>
                         </div>
                     </form>
                 </div>

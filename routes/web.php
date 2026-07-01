@@ -21,6 +21,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     
     Route::get('/banners', [AdminController::class, 'banners'])->name('admin.banners');
     Route::post('/banners', [AdminController::class, 'storeBanner']);
+
     Route::post('/banners/{banner}', [AdminController::class, 'updateBanner'])->name('admin.banners.update');
     Route::delete('/banners/{banner}', [AdminController::class, 'deleteBanner'])->name('admin.banners.delete');
     
@@ -44,7 +45,13 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/galleries/{gallery}', [AdminController::class, 'updateGallery'])->name('admin.galleries.update');
     Route::delete('/galleries/{gallery}', [AdminController::class, 'deleteGallery'])->name('admin.galleries.delete');
     
-    Route::get('/settings', [AdminController::class, 'settings'])->name('admin.settings');
-    Route::post('/settings', [AdminController::class, 'storeSettings']);
+    Route::get('/settings/profile', [AdminController::class, 'settingsProfile'])->name('admin.settings.profile');
+    Route::post('/settings/profile', [AdminController::class, 'storeSettingsProfile']);
+    Route::get('/settings/vision', [AdminController::class, 'settingsVision'])->name('admin.settings.vision');
+    Route::post('/settings/vision', [AdminController::class, 'storeSettingsVision']);
+    Route::get('/settings/mission', [AdminController::class, 'settingsMission'])->name('admin.settings.mission');
+    Route::post('/settings/mission', [AdminController::class, 'storeSettingsMission']);
+    Route::get('/settings/contact', [AdminController::class, 'settingsContact'])->name('admin.settings.contact');
+    Route::post('/settings/contact', [AdminController::class, 'storeSettingsContact']);
 });
 

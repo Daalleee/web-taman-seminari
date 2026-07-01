@@ -9,7 +9,7 @@
             <h2 class="text-lg font-semibold text-slate-800">Galeri Foto</h2>
             <p class="text-sm text-slate-500">Unggah foto kegiatan dan fasilitas sekolah.</p>
         </div>
-        <button @click="openModal = true" class="px-5 py-2.5 bg-indigo-600 text-white rounded-xl font-medium hover:bg-indigo-700 transition-colors shadow-sm flex items-center gap-2">
+        <button @click="openModal = true" class="px-5 py-2.5 bg-primary text-white rounded-xl font-medium hover:bg-primary-container transition-colors shadow-sm flex items-center gap-2">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
             Tambah Foto
         </button>
@@ -23,10 +23,10 @@
                 <div class="absolute inset-0 bg-slate-900/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4">
                     <p class="text-white text-sm font-medium truncate">{{ $gallery->title ?: 'Tanpa Keterangan' }}</p>
                     <div class="flex justify-end gap-2">
-                        <button @click="activeItem = {{ json_encode($gallery) }}; viewModal = true" class="w-8 h-8 bg-teal-500 hover:bg-teal-600 text-white rounded-full flex items-center justify-center shadow-md">
+                        <button @click="activeItem = {{ json_encode($gallery) }}; viewModal = true" class="w-8 h-8 bg-secondary hover:bg-secondary-container text-white rounded-full flex items-center justify-center shadow-md">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
                         </button>
-                        <button @click="activeItem = {{ json_encode($gallery) }}; editModal = true" class="w-8 h-8 bg-indigo-500 hover:bg-indigo-600 text-white rounded-full flex items-center justify-center shadow-md">
+                        <button @click="activeItem = {{ json_encode($gallery) }}; editModal = true" class="w-8 h-8 bg-secondary hover:bg-primary text-white rounded-full flex items-center justify-center shadow-md">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                         </button>
                         <form action="{{ route('admin.galleries.delete', $gallery) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus foto ini?');">@csrf @method('DELETE')
@@ -58,12 +58,12 @@
                             <button type="button" @click="openModal=false" class="text-slate-400 hover:text-slate-600"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
                         </div>
                         <div class="px-6 py-5 space-y-4">
-                            <div><label class="block text-sm font-medium text-slate-700 mb-1">Pilih Foto (Wajib)</label><input type="file" name="image" required accept="image/*" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-indigo-50 file:text-indigo-700 border border-slate-200 rounded-xl"></div>
+                            <div><label class="block text-sm font-medium text-slate-700 mb-1">Pilih Foto (Wajib)</label><input type="file" name="image" required accept="image/*" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-primary/10 file:text-primary border border-slate-200 rounded-xl"></div>
                             <div><label class="block text-sm font-medium text-slate-700 mb-1">Keterangan (Opsional)</label><input type="text" name="title" class="block w-full px-4 py-2.5 border border-slate-200 rounded-xl sm:text-sm bg-slate-50" placeholder="Contoh: Anak-anak bermain"></div>
                         </div>
                         <div class="px-6 py-4 bg-slate-50 flex justify-end gap-3">
                             <button type="button" @click="openModal=false" class="px-4 py-2 text-sm text-slate-600 hover:bg-slate-200 rounded-xl">Batal</button>
-                            <button type="submit" class="px-4 py-2 text-sm text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl shadow-sm">Unggah</button>
+                            <button type="submit" class="px-4 py-2 text-sm text-white bg-primary hover:bg-primary-container rounded-xl shadow-sm">Unggah</button>
                         </div>
                     </form>
                 </div>
@@ -83,12 +83,12 @@
                             <button type="button" @click="editModal=false" class="text-slate-400 hover:text-slate-600"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
                         </div>
                         <div class="px-6 py-5 space-y-4">
-                            <div><label class="block text-sm font-medium text-slate-700 mb-1">Ganti Foto (Opsional)</label><input type="file" name="image" accept="image/*" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-indigo-50 file:text-indigo-700 border border-slate-200 rounded-xl"></div>
+                            <div><label class="block text-sm font-medium text-slate-700 mb-1">Ganti Foto (Opsional)</label><input type="file" name="image" accept="image/*" class="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-primary/10 file:text-primary border border-slate-200 rounded-xl"></div>
                             <div><label class="block text-sm font-medium text-slate-700 mb-1">Keterangan</label><input type="text" name="title" :value="activeItem.title" class="block w-full px-4 py-2.5 border border-slate-200 rounded-xl sm:text-sm bg-slate-50"></div>
                         </div>
                         <div class="px-6 py-4 bg-slate-50 flex justify-end gap-3">
                             <button type="button" @click="editModal=false" class="px-4 py-2 text-sm text-slate-600 hover:bg-slate-200 rounded-xl">Batal</button>
-                            <button type="submit" class="px-4 py-2 text-sm text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl shadow-sm">Simpan Perubahan</button>
+                            <button type="submit" class="px-4 py-2 text-sm text-white bg-primary hover:bg-primary-container rounded-xl shadow-sm">Simpan Perubahan</button>
                         </div>
                     </form>
                 </div>

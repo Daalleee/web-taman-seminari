@@ -21,22 +21,27 @@ document.addEventListener('DOMContentLoaded',()=>{
 </script>
 
 <!-- HERO -->
-<section id="home" class="relative min-h-screen flex items-center overflow-hidden bg-surface">
-    @php $firstBanner = $banners->first(); @endphp
-    @if($firstBanner && $firstBanner->image_path)
-    <div class="absolute inset-0 z-0">
-        <div class="w-full h-full bg-cover bg-center scale-105 transition-transform duration-[20s]" style="background-image: url('{{ asset('storage/'.$firstBanner->image_path) }}')"></div>
+<section id="home" class="relative min-h-screen flex items-center overflow-hidden bg-surface"
+    x-data="{ current: 0, total: {{ $banners->count() }}, go(i) { this.current = i }, next() { this.current = (this.current + 1) % this.total } }"
+    x-init="if(total > 1) setInterval(() => next(), 5000)">
+    
+    @forelse($banners as $i => $banner)
+    <div class="absolute inset-0 z-0 transition-opacity duration-1000" :class="current === {{ $i }} ? 'opacity-100' : 'opacity-0'">
+        <div class="w-full h-full bg-cover bg-center" style="background-image: url('{{ asset('storage/'.$banner->image_path) }}')"></div>
         <div class="absolute inset-0 bg-gradient-to-r from-primary/85 via-primary/50 to-primary/20"></div>
         <div class="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent"></div>
     </div>
-    @endif
+    @empty
+    <div class="absolute inset-0 z-0 bg-gradient-to-r from-primary/85 via-primary/50 to-primary/20"></div>
+    @endforelse
+
     <div class="relative z-10 max-w-container-max mx-auto px-margin-mobile md:px-gutter grid grid-cols-1 md:grid-cols-2 gap-stack-lg items-center w-full">
         <div class="fade-in">
             <h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-white mb-stack-md leading-tight drop-shadow-lg">
-                {{ $firstBanner->title ?? 'Membentuk Hati yang Beriman & Pikiran yang Cemerlang' }}
+                {{ $settings['hero_title'] ?? 'Membentuk Hati yang Beriman & Pikiran yang Cemerlang' }}
             </h1>
             <p class="font-body-lg text-body-lg text-white/80 mb-stack-lg max-w-[540px] drop-shadow">
-                {{ $settings['about_text'] ?? 'Di Taman Seminari TK, kami menanamkan nilai-nilai Kristiani yang mendalam dengan pendekatan pendidikan anak usia dini yang modern dan penuh kasih.' }}
+                {{ $settings['hero_subtitle'] ?? 'Di Taman Seminari, kami menanamkan nilai-nilai Kristiani yang mendalam dengan pendekatan pendidikan anak usia dini yang modern dan penuh kasih.' }}
             </p>
             <div class="flex flex-wrap gap-4">
                 <a href="#about" class="bg-white text-primary px-8 py-4 rounded-xl font-label-md text-label-md hover:shadow-xl hover:scale-[1.02] transition-all active:scale-95 shadow-lg">
@@ -46,6 +51,14 @@ document.addEventListener('DOMContentLoaded',()=>{
                     Hubungi Kami
                 </a>
             </div>
+            @if($banners->count() > 1)
+            <div class="flex gap-2 mt-8">
+                @foreach($banners as $i => $banner)
+                <button @click="go({{ $i }})" class="h-2.5 rounded-full transition-all duration-300"
+                    :class="current === {{ $i }} ? 'bg-white w-8' : 'bg-white/40 hover:bg-white/70 w-2.5'"></button>
+                @endforeach
+            </div>
+            @endif
         </div>
     </div>
 </section>
@@ -54,38 +67,81 @@ document.addEventListener('DOMContentLoaded',()=>{
 <section id="about" class="py-section-gap px-margin-mobile md:px-gutter max-w-container-max mx-auto">
     <div class="text-center mb-16 fade-in">
         <h2 class="font-headline-lg text-headline-lg text-primary mb-4">Tentang</h2>
-        <p class="font-body-md text-body-md text-on-surface-variant max-w-[700px] mx-auto">Visi dan misi kami adalah menjadi terang bagi pertumbuhan spiritual dan intelektual setiap anak.</p>
+        <p class="font-body-md text-body-md text-on-surface-variant max-w-[700px] mx-auto">{{ $settings['about_text'] ?? 'Visi dan misi kami adalah menjadi terang bagi pertumbuhan spiritual dan intelektual setiap anak.' }}</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 fade-in">
+        @php
+            $visionText = $settings['vision'] ?? '';
+            $visionLines = $visionText ? array_filter(array_map('trim', explode("\n", $visionText))) : [];
+            $visionStyle = $settings['vision_style'] ?? 'paragraph';
+        @endphp
         <div class="md:col-span-2 bg-white border border-primary/10 p-10 rounded-xl shadow-sm hover:shadow-md transition-shadow group">
             <div class="flex flex-col md:flex-row gap-8 items-start">
                 <div class="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center text-on-primary shrink-0 transition-transform group-hover:scale-110">
                     <span class="material-symbols-outlined text-3xl">visibility</span>
                 </div>
-                <div>
+                <div class="flex-1">
                     <h3 class="font-headline-sm text-headline-sm text-primary mb-4">Visi Kami</h3>
+                    @if($visionStyle === 'paragraph' || empty($visionLines))
                     <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
                         {{ $settings['vision'] ?? 'Menjadi lembaga pendidikan Katolik unggulan yang membentuk generasi berkarakter mulia, cerdas, dan mandiri berlandaskan kasih Kristus dalam semangat kegembiraan anak-anak.' }}
                     </p>
+                    @elseif($visionStyle === 'number')
+                    <ol class="space-y-3 list-inside list-decimal">
+                        @foreach($visionLines as $line)
+                        <li class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed pl-2">{{ $line }}</li>
+                        @endforeach
+                    </ol>
+                    @elseif($visionStyle === 'bullet')
+                    <ul class="space-y-3 list-inside list-disc">
+                        @foreach($visionLines as $line)
+                        <li class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed pl-2">{{ $line }}</li>
+                        @endforeach
+                    </ul>
+                    @else
+                    <ul class="space-y-3 list-inside">
+                        @foreach($visionLines as $line)
+                        <li class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed flex items-start gap-3">
+                            <span class="text-secondary font-bold flex-shrink-0">–</span>
+                            <span>{{ $line }}</span>
+                        </li>
+                        @endforeach
+                    </ul>
+                    @endif
                 </div>
             </div>
         </div>
         <div class="bg-secondary-container/20 border border-secondary/10 p-10 rounded-xl flex flex-col justify-between">
             <h3 class="font-headline-sm text-headline-sm text-secondary mb-6">Misi Utama</h3>
-            <ul class="space-y-4">
-                <li class="flex items-start gap-3">
-                    <span class="material-symbols-outlined text-secondary pt-1">church</span>
-                    <span class="font-body-md text-body-md text-on-surface">Pendidikan karakter religius</span>
-                </li>
-                <li class="flex items-start gap-3">
-                    <span class="material-symbols-outlined text-secondary pt-1">family_restroom</span>
-                    <span class="font-body-md text-body-md text-on-surface">Kolaborasi aktif dengan orang tua</span>
-                </li>
-                <li class="flex items-start gap-3">
-                    <span class="material-symbols-outlined text-secondary pt-1">eco</span>
-                    <span class="font-body-md text-body-md text-on-surface">Pengenalan kasih pada sesama</span>
-                </li>
+            @php
+                $missionText = $settings['mission'] ?? '';
+                $missionLines = $missionText ? array_filter(array_map('trim', explode("\n", $missionText))) : ['Pendidikan karakter religius', 'Kolaborasi aktif dengan orang tua', 'Pengenalan kasih pada sesama'];
+                $missionStyle = $settings['mission_style'] ?? 'number';
+            @endphp
+            @if($missionStyle === 'paragraph')
+            <p class="font-body-md text-body-md text-on-surface leading-relaxed">{{ implode(' ', $missionLines) }}</p>
+            @elseif($missionStyle === 'number')
+            <ol class="space-y-4 list-inside list-decimal">
+                @foreach($missionLines as $line)
+                <li class="font-body-md text-body-md text-on-surface leading-relaxed pl-2">{{ $line }}</li>
+                @endforeach
+            </ol>
+            @elseif($missionStyle === 'bullet')
+            <ul class="space-y-4 list-inside list-disc">
+                @foreach($missionLines as $line)
+                <li class="font-body-md text-body-md text-on-surface leading-relaxed pl-2">{{ $line }}</li>
+                @endforeach
             </ul>
+            @else
+            <ul class="space-y-4 list-inside">
+                @foreach($missionLines as $line)
+                <li class="font-body-md text-body-md text-on-surface leading-relaxed flex items-start gap-3">
+                    <span class="text-secondary font-bold">–</span>
+                    <span>{{ $line }}</span>
+                </li>
+                @endforeach
+            </ul>
+            @endif
         </div>
     </div>
 </section>

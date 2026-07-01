@@ -31,18 +31,19 @@ class AdminController extends Controller
         return view('admin.banners', compact('banners'));
     }
 
+
     public function storeBanner(Request $request)
     {
-        $request->validate(['image' => 'required|image', 'title' => 'nullable', 'subtitle' => 'nullable']);
+        $request->validate(['image' => 'required|image']);
         $path = $request->file('image')->store('banners', 'public');
-        Banner::create(['title' => $request->title, 'subtitle' => $request->subtitle, 'image_path' => $path]);
+        Banner::create(['image_path' => $path]);
         return back()->with('success', 'Banner berhasil ditambahkan');
     }
 
     public function updateBanner(Request $request, Banner $banner)
     {
-        $request->validate(['image' => 'nullable|image', 'title' => 'nullable', 'subtitle' => 'nullable']);
-        $data = ['title' => $request->title, 'subtitle' => $request->subtitle];
+        $request->validate(['image' => 'nullable|image']);
+        $data = [];
         
         if ($request->hasFile('image')) {
             Storage::disk('public')->delete($banner->image_path);
@@ -196,18 +197,63 @@ class AdminController extends Controller
     }
 
     // --- SETTINGS ---
-    public function settings()
+    private function getSettings()
     {
-        $settings = Setting::all()->pluck('value', 'key');
-        return view('admin.settings', compact('settings'));
+        return Setting::all()->pluck('value', 'key');
     }
 
-    public function storeSettings(Request $request)
+    private function saveSettings($data)
     {
-        $data = $request->except(['_token']);
         foreach ($data as $key => $value) {
             Setting::updateOrCreate(['key' => $key], ['value' => $value]);
         }
-        return back()->with('success', 'Pengaturan berhasil diperbarui');
+    }
+
+    public function settingsProfile()
+    {
+        $settings = $this->getSettings();
+        return view('admin.settings-profile', compact('settings'));
+    }
+
+    public function storeSettingsProfile(Request $request)
+    {
+        $this->saveSettings($request->except(['_token']));
+        return back()->with('success', 'Profil sekolah berhasil diperbarui');
+    }
+
+    public function settingsVision()
+    {
+        $settings = $this->getSettings();
+        return view('admin.settings-vision', compact('settings'));
+    }
+
+    public function storeSettingsVision(Request $request)
+    {
+        $this->saveSettings($request->except(['_token']));
+        return back()->with('success', 'Visi berhasil diperbarui');
+    }
+
+    public function settingsMission()
+    {
+        $settings = $this->getSettings();
+        return view('admin.settings-mission', compact('settings'));
+    }
+
+    public function storeSettingsMission(Request $request)
+    {
+        $this->saveSettings($request->except(['_token']));
+        return back()->with('success', 'Misi berhasil diperbarui');
+    }
+
+    public function settingsContact()
+    {
+        $settings = $this->getSettings();
+        return view('admin.settings-contact', compact('settings'));
+    }
+
+    public function storeSettingsContact(Request $request)
+    {
+        $this->saveSettings($request->except(['_token']));
+        return back()->with('success', 'Kontak berhasil diperbarui');
     }
 }
