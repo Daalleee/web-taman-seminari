@@ -43,6 +43,19 @@
             <h3 class="text-2xl font-bold text-on-surface">{{ $stats['galleries'] ?? 0 }}</h3>
         </div>
     </div>
+
+    <div class="bg-white rounded-2xl p-6 shadow-sm border border-primary/5 flex items-center gap-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
+        <div class="w-14 h-14 rounded-xl bg-secondary/10 text-secondary flex items-center justify-center">
+            <span class="material-symbols-outlined text-[28px]">mail</span>
+        </div>
+        <div>
+            <p class="text-sm font-medium text-on-surface-variant">Pesan Masuk</p>
+            <h3 class="text-2xl font-bold text-on-surface">{{ $stats['messages'] ?? 0 }}</h3>
+            @if(($stats['unreadMessages'] ?? 0) > 0)
+                <p class="text-xs text-red-500 font-medium mt-0.5">{{ $stats['unreadMessages'] }} belum dibaca</p>
+            @endif
+        </div>
+    </div>
 </div>
 
 <div class="mt-8 bg-white rounded-2xl shadow-sm border border-primary/5 p-8 text-center">

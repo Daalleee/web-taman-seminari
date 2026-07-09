@@ -14,6 +14,7 @@
         .animate-fade-in { animation: fadeIn 0.4s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
+    @stack('head')
 </head>
 <body class="bg-surface text-on-surface antialiased h-screen flex overflow-hidden">
 
@@ -48,6 +49,14 @@
                 <span class="material-symbols-outlined text-[20px]">wall_art</span>
                 Galeri
             </a>
+            <a href="{{ route('admin.messages') }}" class="flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all duration-200 text-sm {{ request()->routeIs('admin.messages*') ? 'bg-primary-container text-white font-semibold border-l-2 border-secondary' : 'text-white/70 hover:bg-white/10 hover:text-white' }}">
+                <span class="material-symbols-outlined text-[20px]">mail</span>
+                Pesan
+                @php $unreadCount = \App\Models\Message::unread()->count(); @endphp
+                @if($unreadCount > 0)
+                    <span class="ml-auto bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full min-w-[20px] text-center leading-tight">{{ $unreadCount }}</span>
+                @endif
+            </a>
             <a href="{{ route('admin.faqs') }}" class="flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all duration-200 text-sm {{ request()->routeIs('admin.faqs') ? 'bg-primary-container text-white font-semibold border-l-2 border-secondary' : 'text-white/70 hover:bg-white/10 hover:text-white' }}">
                 <span class="material-symbols-outlined text-[20px]">help</span>
                 FAQ
@@ -71,6 +80,10 @@
             <a href="{{ route('admin.settings.contact') }}" class="flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all duration-200 text-sm {{ request()->routeIs('admin.settings.contact') ? 'bg-primary-container text-white font-semibold border-l-2 border-secondary' : 'text-white/70 hover:bg-white/10 hover:text-white' }}">
                 <span class="material-symbols-outlined text-[20px]">contact_phone</span>
                 Kontak
+            </a>
+            <a href="{{ route('admin.settings.operational-hours') }}" class="flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all duration-200 text-sm {{ request()->routeIs('admin.settings.operational-hours') ? 'bg-primary-container text-white font-semibold border-l-2 border-secondary' : 'text-white/70 hover:bg-white/10 hover:text-white' }}">
+                <span class="material-symbols-outlined text-[20px]">schedule</span>
+                Jam Operasional
             </a>
         </nav>
 
@@ -132,5 +145,38 @@
     </main>
 
     @yield('modal')
+
+    <!-- Delete Confirmation Modal -->
+    <div x-data="{ open: false, title: '', message: '', action: '' }" x-on:show-delete-confirm.window="open = true; title = $event.detail.title; message = $event.detail.message; action = $event.detail.action" x-show="open" class="fixed inset-0 z-[99999] overflow-y-auto" style="display: none;">
+        <div class="flex items-center justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:p-0">
+            <div x-show="open" @click="open = false" x-transition.opacity class="fixed inset-0 transition-opacity">
+                <div class="absolute inset-0 bg-slate-900/70 backdrop-blur-sm"></div>
+            </div>
+            <div x-show="open" x-transition class="inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-md w-full border border-slate-100 relative z-10">
+                <div class="px-6 pt-6 pb-4 text-center">
+                    <div class="mx-auto w-14 h-14 rounded-full bg-red-100 flex items-center justify-center mb-4">
+                        <svg class="w-7 h-7 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4.5c-.77-.833-2.694-.833-3.464 0L3.34 16.5c-.77.833.192 2.5 1.732 2.5z"></path></svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-slate-800 mb-2" x-text="title"></h3>
+                    <p class="text-sm text-slate-500" x-text="message"></p>
+                </div>
+                <div class="px-6 pb-6 flex justify-center gap-3">
+                    <button @click="open = false" class="px-5 py-2.5 text-sm font-medium text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 rounded-xl transition-colors">Batal</button>
+                    <form :action="action" method="POST" class="inline">
+                        @csrf @method('DELETE')
+                        <button type="submit" class="px-5 py-2.5 text-sm font-medium rounded-xl transition-colors shadow-sm flex items-center gap-2" style="background:#dc2626;color:white;">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                            Ya, Hapus
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    function openMailto(email) {
+        if (email) location.href = 'mailto:' + email;
+    }
+</script>
 </body>
 </html>

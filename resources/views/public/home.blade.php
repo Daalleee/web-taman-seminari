@@ -146,41 +146,6 @@ document.addEventListener('DOMContentLoaded',()=>{
     </div>
 </section>
 
-<!-- KEUNGGULAN -->
-<section class="bg-primary py-section-gap">
-    <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
-        <div class="flex flex-col md:flex-row justify-between items-end gap-stack-md mb-16 fade-in">
-            <div class="max-w-xl">
-                <h2 class="font-headline-lg text-headline-lg text-on-primary mb-4">Keunggulan</h2>
-                <p class="font-body-md text-body-md text-on-primary/80">Kami menyediakan lingkungan yang aman dan stimulatif untuk mendukung setiap tahap perkembangan anak.</p>
-            </div>
-            <div class="hidden md:block h-[2px] bg-secondary flex-grow mx-12 mb-5 opacity-30"></div>
-        </div>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter fade-in">
-            <div class="bg-primary-container p-8 rounded-xl border border-white/10 hover:border-secondary transition-colors group">
-                <span class="material-symbols-outlined text-secondary-fixed text-4xl mb-6 block">school</span>
-                <h4 class="font-headline-sm text-headline-sm text-on-primary mb-3">Kurikulum Holistik</h4>
-                <p class="font-body-md text-body-md text-on-primary/70">Menggabungkan akademis, seni, dan nilai spiritual dalam satu kesatuan.</p>
-            </div>
-            <div class="bg-primary-container p-8 rounded-xl border border-white/10 hover:border-secondary transition-colors group">
-                <span class="material-symbols-outlined text-secondary-fixed text-4xl mb-6 block">shield_with_heart</span>
-                <h4 class="font-headline-sm text-headline-sm text-on-primary mb-3">Lingkungan Aman</h4>
-                <p class="font-body-md text-body-md text-on-primary/70">Fasilitas ramah anak dengan pengawasan staf yang berdedikasi tinggi.</p>
-            </div>
-            <div class="bg-primary-container p-8 rounded-xl border border-white/10 hover:border-secondary transition-colors group">
-                <span class="material-symbols-outlined text-secondary-fixed text-4xl mb-6 block">diversity_1</span>
-                <h4 class="font-headline-sm text-headline-sm text-on-primary mb-3">Kelas Kecil</h4>
-                <p class="font-body-md text-body-md text-on-primary/70">Rasio guru dan siswa yang ideal untuk perhatian yang personal.</p>
-            </div>
-            <div class="bg-primary-container p-8 rounded-xl border border-white/10 hover:border-secondary transition-colors group">
-                <span class="material-symbols-outlined text-secondary-fixed text-4xl mb-6 block">menu_book</span>
-                <h4 class="font-headline-sm text-headline-sm text-on-primary mb-3">Metode Aktif</h4>
-                <p class="font-body-md text-body-md text-on-primary/70">Belajar melalui bermain dan eksplorasi yang menyenangkan.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- BERITA -->
 <section id="news" class="py-section-gap overflow-hidden">
     <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
@@ -373,29 +338,39 @@ document.addEventListener('DOMContentLoaded',()=>{
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter fade-in">
             <div class="lg:col-span-7 bg-surface-container-lowest border border-primary/10 rounded-xl p-8 md:p-10 shadow-sm">
                 <h2 class="font-headline-sm text-headline-sm text-primary mb-8">Kirim Pesan</h2>
-                <form class="space-y-6">
+
+                @if(session('success'))
+                <div class="mb-6 p-4 rounded-xl bg-secondary/10 border border-secondary/20 text-secondary flex items-center gap-3">
+                    <span class="material-symbols-outlined text-secondary text-[20px]">check_circle</span>
+                    <p class="font-medium text-sm">{{ session('success') }}</p>
+                </div>
+                @endif
+
+                @if($errors->any())
+                <div class="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 text-red-600 text-sm">
+                    <ul class="list-disc list-inside space-y-1">
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+
+                <form action="{{ route('contact.store') }}" method="POST" class="space-y-6">
+                    @csrf
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="space-y-2">
-                            <label class="font-label-md text-label-md text-on-surface-variant">Nama Lengkap</label>
-                            <input class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface-bright font-body-md text-body-md focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all" placeholder="Masukkan nama Anda" type="text">
+                            <label class="font-label-md text-label-md text-on-surface-variant">Nama</label>
+                            <input name="name" value="{{ old('name') }}" class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface-bright font-body-md text-body-md focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all" placeholder="Masukkan nama Anda" type="text" required>
                         </div>
                         <div class="space-y-2">
-                            <label class="font-label-md text-label-md text-on-surface-variant">Alamat Email</label>
-                            <input class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface-bright font-body-md text-body-md focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all" placeholder="nama@email.com" type="email">
+                            <label class="font-label-md text-label-md text-on-surface-variant">Email</label>
+                            <input name="email" value="{{ old('email') }}" class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface-bright font-body-md text-body-md focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all" placeholder="nama@email.com" type="email" required>
                         </div>
-                    </div>
-                    <div class="space-y-2">
-                        <label class="font-label-md text-label-md text-on-surface-variant">Subjek</label>
-                        <select class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface-bright font-body-md text-body-md focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all appearance-none">
-                            <option>Informasi Pendaftaran</option>
-                            <option>Kurikulum & Kegiatan</option>
-                            <option>Jadwal Kunjungan</option>
-                            <option>Lainnya</option>
-                        </select>
                     </div>
                     <div class="space-y-2">
                         <label class="font-label-md text-label-md text-on-surface-variant">Pesan</label>
-                        <textarea class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface-bright font-body-md text-body-md focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all" placeholder="Tuliskan pertanyaan atau pesan Anda di sini..." rows="5"></textarea>
+                        <textarea name="message" class="w-full px-4 py-3 rounded-lg border border-outline-variant bg-surface-bright font-body-md text-body-md focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all" placeholder="Tuliskan pertanyaan atau pesan Anda di sini..." rows="5" required>{{ old('message') }}</textarea>
                     </div>
                     <button class="bg-primary text-on-primary px-8 py-4 rounded-full font-label-md text-label-md flex items-center justify-center gap-2 hover:bg-primary-container transition-all active:scale-95 group" type="submit">
                         Kirim Pesan
@@ -448,15 +423,15 @@ document.addEventListener('DOMContentLoaded',()=>{
                     <ul class="space-y-4">
                         <li class="flex justify-between items-center border-b border-on-primary/10 pb-2">
                             <span class="font-body-md">Senin - Jumat</span>
-                            <span class="font-label-md">07:30 - 14:00</span>
+                            <span class="font-label-md">{{ $settings['operational_hours_weekday'] ?? '07:30 - 14:00' }}</span>
                         </li>
                         <li class="flex justify-between items-center border-b border-on-primary/10 pb-2">
                             <span class="font-body-md">Sabtu</span>
-                            <span class="font-label-md">08:00 - 12:00</span>
+                            <span class="font-label-md">{{ $settings['operational_hours_saturday'] ?? '08:00 - 12:00' }}</span>
                         </li>
                         <li class="flex justify-between items-center text-on-primary/60">
                             <span class="font-body-md">Minggu & Libur</span>
-                            <span class="font-label-md">Tutup</span>
+                            <span class="font-label-md">{{ $settings['operational_hours_sunday_holiday'] ?? 'Tutup' }}</span>
                         </li>
                     </ul>
                 </div>
@@ -472,20 +447,29 @@ document.addEventListener('DOMContentLoaded',()=>{
     </div>
 </section>
 
+@push('head')
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+@endpush
+
 <!-- MAP -->
 <section class="pb-section-gap px-margin-mobile md:px-gutter max-w-container-max mx-auto">
     <div class="rounded-2xl overflow-hidden border border-primary/10 shadow-sm h-[450px] relative bg-surface-container-low">
-        @if(!empty($settings['address']))
-            <iframe class="w-full h-full border-0"
-                    src="https://maps.google.com/maps?q={{ urlencode($settings['address']) }}&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        @php
+            $mapLat = $settings['map_latitude'] ?? null;
+            $mapLng = $settings['map_longitude'] ?? null;
+            $hasCoords = $mapLat && $mapLng;
+        @endphp
+        @if($hasCoords)
+            <div id="public-map" class="w-full h-full"></div>
+        @elseif(!empty($settings['address']))
+            <div id="public-map" class="w-full h-full"></div>
         @else
             <div class="w-full h-full flex flex-col items-center justify-center text-on-surface-variant">
                 <span class="material-symbols-outlined text-4xl text-outline mb-3">map</span>
                 <p class="font-label-md">Peta Belum Tersedia</p>
             </div>
         @endif
-        <div class="absolute bottom-6 left-6 right-6 md:right-auto md:w-80 bg-surface-container-lowest/90 backdrop-blur-md p-6 rounded-xl shadow-xl">
+        <div class="absolute bottom-6 left-6 right-6 md:right-auto md:w-80 bg-surface-container-lowest/90 backdrop-blur-md p-6 rounded-xl shadow-xl z-[1000]">
             <div class="flex items-center gap-2 text-primary mb-2">
                 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">location_on</span>
                 <span class="font-label-md text-label-md uppercase">Lokasi Kami</span>
@@ -494,5 +478,58 @@ document.addEventListener('DOMContentLoaded',()=>{
         </div>
     </div>
 </section>
+
+@if($hasCoords || !empty($settings['address']))
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var mapEl = document.getElementById('public-map');
+        if (!mapEl) return;
+
+        @if($hasCoords)
+            var lat = {{ $mapLat }};
+            var lng = {{ $mapLng }};
+        @else
+            var lat = -6.2088;
+            var lng = 106.8456;
+        @endif
+
+        var map = L.map('public-map', {
+            center: [lat, lng],
+            zoom: 16,
+            zoomControl: true,
+            scrollWheelZoom: true,
+        });
+
+        L.tileLayer('https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}', {
+            maxZoom: 20,
+        }).addTo(map);
+
+        var schoolName = '{{ addslashes($settings['school_name'] ?? 'Taman Seminari St. Mikael') }}';
+
+        var markerIcon = L.divIcon({
+            html: '<div style="display:flex;flex-direction:column;align-items:center;gap:2px;"><div style="background:#003366;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(0,0,0,0.4);border:3px solid white;"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg></div><span style="background:white;color:#003366;font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px;box-shadow:0 1px 4px rgba(0,0,0,0.2);white-space:nowrap;font-family:sans-serif;">' + schoolName + '</span></div>',
+            iconSize: [36, 58],
+            iconAnchor: [18, 58],
+            className: '',
+        });
+
+        var marker = L.marker([lat, lng], { icon: markerIcon }).addTo(map);
+
+        @if(!$hasCoords && !empty($settings['address']))
+            var address = '{{ addslashes($settings['address']) }}';
+            fetch('https://nominatim.openstreetmap.org/search?format=json&q=' + encodeURIComponent(address) + '&limit=1&countrycodes=id')
+                .then(function (res) { return res.json(); })
+                .then(function (data) {
+                    if (data.length > 0) {
+                        var loc = data[0];
+                        map.setView([loc.lat, loc.lon], 16);
+                        marker.setLatLng([loc.lat, loc.lon]);
+                    }
+                });
+        @endif
+    });
+</script>
+@endif
 
 @endsection

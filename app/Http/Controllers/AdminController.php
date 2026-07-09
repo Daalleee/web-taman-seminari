@@ -8,6 +8,7 @@ use App\Models\Faq;
 use App\Models\News;
 use App\Models\Activity;
 use App\Models\Gallery;
+use App\Models\Message;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Storage;
 
@@ -20,6 +21,8 @@ class AdminController extends Controller
             'news' => News::count(),
             'activities' => Activity::count(),
             'galleries' => Gallery::count(),
+            'messages' => Message::count(),
+            'unreadMessages' => Message::unread()->count(),
         ];
         return view('admin.dashboard', compact('stats'));
     }
@@ -196,6 +199,25 @@ class AdminController extends Controller
         return back()->with('success', 'Foto berhasil dihapus');
     }
 
+    // --- MESSAGES ---
+    public function messages()
+    {
+        $messages = Message::latest()->get();
+        return view('admin.messages', compact('messages'));
+    }
+
+    public function showMessage(Message $message)
+    {
+        $message->markAsRead();
+        return response()->json($message);
+    }
+
+    public function deleteMessage(Message $message)
+    {
+        $message->delete();
+        return back()->with('success', 'Pesan berhasil dihapus');
+    }
+
     // --- SETTINGS ---
     private function getSettings()
     {
@@ -255,5 +277,17 @@ class AdminController extends Controller
     {
         $this->saveSettings($request->except(['_token']));
         return back()->with('success', 'Kontak berhasil diperbarui');
+    }
+
+    public function settingsOperationalHours()
+    {
+        $settings = $this->getSettings();
+        return view('admin.settings-operational-hours', compact('settings'));
+    }
+
+    public function storeSettingsOperationalHours(Request $request)
+    {
+        $this->saveSettings($request->except(['_token']));
+        return back()->with('success', 'Jam operasional berhasil diperbarui');
     }
 }

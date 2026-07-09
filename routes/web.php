@@ -9,6 +9,7 @@ use App\Http\Controllers\PublicController;
 Route::get('/', [PublicController::class, 'home'])->name('home');
 Route::get('/berita/{news}', [PublicController::class, 'newsDetail'])->name('news.show');
 Route::get('/kegiatan/{activity}', [PublicController::class, 'activityDetail'])->name('activity.show');
+Route::post('/contact', [PublicController::class, 'storeMessage'])->name('contact.store');
 
 // Auth Routes
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login')->middleware('guest');
@@ -45,6 +46,10 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/galleries/{gallery}', [AdminController::class, 'updateGallery'])->name('admin.galleries.update');
     Route::delete('/galleries/{gallery}', [AdminController::class, 'deleteGallery'])->name('admin.galleries.delete');
     
+    Route::get('/messages', [AdminController::class, 'messages'])->name('admin.messages');
+    Route::get('/messages/{message}', [AdminController::class, 'showMessage'])->name('admin.messages.show');
+    Route::delete('/messages/{message}', [AdminController::class, 'deleteMessage'])->name('admin.messages.delete');
+
     Route::get('/settings/profile', [AdminController::class, 'settingsProfile'])->name('admin.settings.profile');
     Route::post('/settings/profile', [AdminController::class, 'storeSettingsProfile']);
     Route::get('/settings/vision', [AdminController::class, 'settingsVision'])->name('admin.settings.vision');
@@ -53,5 +58,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/settings/mission', [AdminController::class, 'storeSettingsMission']);
     Route::get('/settings/contact', [AdminController::class, 'settingsContact'])->name('admin.settings.contact');
     Route::post('/settings/contact', [AdminController::class, 'storeSettingsContact']);
+    Route::get('/settings/operational-hours', [AdminController::class, 'settingsOperationalHours'])->name('admin.settings.operational-hours');
+    Route::post('/settings/operational-hours', [AdminController::class, 'storeSettingsOperationalHours']);
 });
 

@@ -41,8 +41,8 @@
                         <div class="flex items-center justify-end gap-2">
                             <button @click="activeItem = {{ json_encode($item) }}; viewModal = true" class="text-secondary hover:bg-secondary/10 px-3 py-1.5 rounded-lg text-sm font-medium">Lihat</button>
                             <button @click="activeItem = {{ json_encode($item) }}; editModal = true" class="text-secondary hover:bg-secondary/10 px-3 py-1.5 rounded-lg text-sm font-medium">Edit</button>
-                            <form action="{{ route('admin.news.delete', $item) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus berita ini?');">@csrf @method('DELETE')
-                                <button class="text-red-500 hover:bg-red-50 px-3 py-1.5 rounded-lg text-sm font-medium">Hapus</button>
+                            <form method="POST" class="inline">@csrf @method('DELETE')
+                                <button type="button" @click="window.dispatchEvent(new CustomEvent('show-delete-confirm', { detail: { title: 'Hapus Berita?', message: 'Yakin ingin menghapus berita ini? Tindakan ini tidak bisa dibatalkan.', action: '{{ route('admin.news.delete', $item) }}' } }))" class="text-red-500 hover:bg-red-50 px-3 py-1.5 rounded-lg text-sm font-medium">Hapus</button>
                             </form>
                         </div>
                     </td>

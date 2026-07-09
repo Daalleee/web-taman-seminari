@@ -33,9 +33,9 @@
                     <td class="py-4 px-6 text-right">
                         <div class="flex items-center justify-end gap-2">
                             <button @click="activeFaq = {{ json_encode($faq) }}; editModal = true" class="text-secondary hover:bg-secondary/10 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors">Edit</button>
-                            <form action="{{ route('admin.faqs.delete', $faq) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus FAQ ini?');">
+                            <form method="POST" class="inline">
                                 @csrf @method('DELETE')
-                                <button class="text-red-500 hover:bg-red-50 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors">Hapus</button>
+                                <button type="button" @click="window.dispatchEvent(new CustomEvent('show-delete-confirm', { detail: { title: 'Hapus FAQ?', message: 'Yakin ingin menghapus FAQ ini? Tindakan ini tidak bisa dibatalkan.', action: '{{ route('admin.faqs.delete', $faq) }}' } }))" class="text-red-500 hover:bg-red-50 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors">Hapus</button>
                             </form>
                         </div>
                     </td>

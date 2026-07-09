@@ -39,6 +39,9 @@ class DatabaseSeeder extends Seeder
             ['key' => 'phone', 'value' => '+62 812 3456 7890'],
             ['key' => 'email', 'value' => 'info@tamanseminari.sch.id'],
             ['key' => 'address', 'value' => 'Jl. Pendidikan No. 1, Penajam Paser Utara, Kalimantan Timur'],
+            ['key' => 'operational_hours_weekday', 'value' => '07:30 - 14:00'],
+            ['key' => 'operational_hours_saturday', 'value' => '08:00 - 12:00'],
+            ['key' => 'operational_hours_sunday_holiday', 'value' => 'Tutup'],
         ];
         foreach ($settings as $s) {
             Setting::updateOrCreate(['key' => $s['key']], ['value' => $s['value']]);

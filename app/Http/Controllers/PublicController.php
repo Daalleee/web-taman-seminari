@@ -7,7 +7,9 @@ use App\Models\Faq;
 use App\Models\News;
 use App\Models\Activity;
 use App\Models\Gallery;
+use App\Models\Message;
 use App\Models\Setting;
+use Illuminate\Http\Request;
 
 class PublicController extends Controller
 {
@@ -21,6 +23,19 @@ class PublicController extends Controller
         $settings = Setting::all()->pluck('value', 'key');
 
         return view('public.home', compact('banners', 'faqs', 'newsList', 'activities', 'galleries', 'settings'));
+    }
+
+    public function storeMessage(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255',
+            'message' => 'required',
+        ]);
+
+        Message::create($request->only(['name', 'email', 'message']));
+
+        return redirect()->route('home')->with('success', 'Pesan berhasil dikirim! Kami akan menghubungi Anda segera.');
     }
 
     public function newsDetail(News $news)

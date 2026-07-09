@@ -10,13 +10,14 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
-<style>
-    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; display: inline-block; line-height: 1; }
-    .scrolled-nav { background-color: rgba(251, 249, 248, 0.95); backdrop-filter: blur(8px); }
-    .glass-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(8px); border: 1px solid rgba(0, 30, 64, 0.05); }
-    .sacred-gradient { background: linear-gradient(135deg, #001e40 0%, #003366 100%); }
-    html { scroll-behavior: smooth; }
-</style>
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; display: inline-block; line-height: 1; }
+        .scrolled-nav { background-color: rgba(251, 249, 248, 0.95); backdrop-filter: blur(8px); }
+        .glass-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(8px); border: 1px solid rgba(0, 30, 64, 0.05); }
+        .sacred-gradient { background: linear-gradient(135deg, #001e40 0%, #003366 100%); }
+        html { scroll-behavior: smooth; }
+    </style>
+    @stack('head')
 </head>
 <body class="bg-background text-on-surface selection:bg-secondary-fixed selection:text-on-secondary-fixed font-body-md">
 
