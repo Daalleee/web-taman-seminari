@@ -87,20 +87,9 @@
     <div class="py-8 px-margin-mobile md:px-gutter max-w-container-max mx-auto flex flex-col md:flex-row justify-between gap-6">
         <div class="max-w-sm">
             <div class="font-headline-sm text-headline-sm text-on-primary mb-3">{{ $settings['school_name'] ?? 'Taman Seminari TK' }}</div>
-            <p class="font-body-md text-body-md text-on-primary/80 mb-4 leading-relaxed">
+            <p class="font-body-md text-body-md text-on-primary/80 leading-relaxed">
                 Mendidik anak dengan kasih, membimbing mereka dengan iman, dan mempersiapkan mereka untuk masa depan yang gemilang.
             </p>
-            <div class="flex gap-3">
-                <a class="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center hover:bg-secondary-fixed hover:text-on-secondary-fixed transition-colors" href="#">
-                    <span class="material-symbols-outlined text-base">public</span>
-                </a>
-                <a class="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center hover:bg-secondary-fixed hover:text-on-secondary-fixed transition-colors" href="#">
-                    <span class="material-symbols-outlined text-base">alternate_email</span>
-                </a>
-                <a class="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center hover:bg-secondary-fixed hover:text-on-secondary-fixed transition-colors" href="#">
-                    <span class="material-symbols-outlined text-base">call</span>
-                </a>
-            </div>
         </div>
         <div class="grid grid-cols-2 gap-6">
             <div>
