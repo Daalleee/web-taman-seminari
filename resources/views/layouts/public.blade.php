@@ -17,6 +17,7 @@
 <meta name="twitter:title" content="@yield('title', 'Taman Seminari Santo Mikael')">
 <meta name="twitter:description" content="TK Katolik yang mendidik anak dengan kasih, membimbing dengan iman, dan mempersiapkan masa depan gemilang.">
 
+@verbatim
 <script type="application/ld+json">
 {
     "@context": "https://schema.org",
@@ -30,6 +31,7 @@
     }
 }
 </script>
+@endverbatim
 
 <title>@yield('title', 'Taman Seminari Santo Mikael')</title>
 @vite(['resources/css/app.css', 'resources/js/app.js'])
