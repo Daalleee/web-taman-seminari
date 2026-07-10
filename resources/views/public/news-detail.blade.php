@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 <main class="max-w-container-max mx-auto px-margin-mobile md:px-gutter py-stack-lg">
     <header class="mb-section-gap text-center md:text-left fade-in">
-        <a href="{{ url('/#news') }}" class="inline-flex items-center gap-1 text-secondary font-label-md text-label-md hover:gap-2 transition-all mb-4">
+        <a href="{{ url('/berita') }}" class="inline-flex items-center gap-1 text-secondary font-label-md text-label-md hover:gap-2 transition-all mb-4">
             <span class="material-symbols-outlined text-[18px]">arrow_back</span>
             Kembali ke Berita
         </a>
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded',()=>{
                     @endforelse
                 </div>
             </div>
-            <a href="{{ url('/#contact') }}" class="block bg-primary text-on-primary p-6 rounded-xl text-center hover:bg-primary-container transition-all">
+            <a href="{{ url('/kontak') }}" class="block bg-primary text-on-primary p-6 rounded-xl text-center hover:bg-primary-container transition-all">
                 <span class="material-symbols-outlined mb-2 text-secondary-fixed text-3xl block">mail</span>
                 <h4 class="font-headline-sm text-headline-sm mb-2">Hubungi Kami</h4>
                 <p class="font-body-md text-body-md text-on-primary/70">Info lebih lanjut tentang sekolah.</p>

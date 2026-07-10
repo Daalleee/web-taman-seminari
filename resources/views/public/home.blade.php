@@ -44,10 +44,10 @@ document.addEventListener('DOMContentLoaded',()=>{
                 {{ $settings['hero_subtitle'] ?? 'Di Taman Seminari, kami menanamkan nilai-nilai Kristiani yang mendalam dengan pendekatan pendidikan anak usia dini yang modern dan penuh kasih.' }}
             </p>
             <div class="flex flex-wrap gap-4">
-                <a href="#about" class="bg-white text-primary px-8 py-4 rounded-xl font-label-md text-label-md hover:shadow-xl hover:scale-[1.02] transition-all active:scale-95 shadow-lg">
+                <a href="{{ url('/tentang') }}" class="bg-white text-primary px-8 py-4 rounded-xl font-label-md text-label-md hover:shadow-xl hover:scale-[1.02] transition-all active:scale-95 shadow-lg">
                     Selengkapnya
                 </a>
-                <a href="#contact" class="bg-white/10 backdrop-blur-sm border border-white/40 text-white px-8 py-4 rounded-xl font-label-md text-label-md hover:bg-white/20 transition-all active:scale-95">
+                <a href="{{ url('/kontak') }}" class="bg-white/10 backdrop-blur-sm border border-white/40 text-white px-8 py-4 rounded-xl font-label-md text-label-md hover:bg-white/20 transition-all active:scale-95">
                     Hubungi Kami
                 </a>
             </div>

@@ -21,19 +21,29 @@
 </head>
 <body class="bg-background text-on-surface selection:bg-secondary-fixed selection:text-on-secondary-fixed font-body-md">
 
-<nav x-data="{ activeSection: 'home', mobileMenu: false, scrolled: false }" @scroll.window="scrolled = (window.pageYOffset > 20)"
+<nav x-data="{
+    activeSection: 'home',
+    mobileMenu: false,
+    scrolled: false,
+    goTo(section, url) {
+        this.activeSection = section;
+        this.mobileMenu = false;
+        window.history.pushState(null, '', url);
+        document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });
+    }
+}" @scroll.window="scrolled = (window.pageYOffset > 20)"
      class="w-full top-0 sticky z-50 bg-surface dark:bg-surface-container-low border-b border-primary/10 transition-all duration-300"
      :class="{'scrolled-nav shadow-md': scrolled}">
     <div class="flex justify-between items-center max-w-container-max mx-auto px-margin-mobile md:px-gutter h-16">
-        <a href="{{ url('/#home') }}" class="text-2xl font-bold tracking-tight" style="color: #001e40; font-family: 'Source Serif 4', serif;">Taman Seminari</a>
+        <a href="{{ url('/') }}" class="text-2xl font-bold tracking-tight" style="color: #001e40; font-family: 'Source Serif 4', serif;">Taman Seminari</a>
         <div class="hidden md:flex items-center gap-stack-lg">
-            <a href="{{ url('/#home') }}" @click="activeSection = 'home'" :class="activeSection === 'home' ? 'text-primary font-bold border-b-2 border-secondary' : 'text-on-surface-variant hover:text-secondary'" class="font-body-md text-body-md cursor-pointer active:scale-95 transition-colors duration-200">Beranda</a>
-            <a href="{{ url('/#about') }}" @click="activeSection = 'about'" :class="activeSection === 'about' ? 'text-primary font-bold border-b-2 border-secondary' : 'text-on-surface-variant hover:text-secondary'" class="font-body-md text-body-md cursor-pointer active:scale-95 transition-colors duration-200">Tentang</a>
-            <a href="{{ url('/#news') }}" @click="activeSection = 'news'" :class="activeSection === 'news' ? 'text-primary font-bold border-b-2 border-secondary' : 'text-on-surface-variant hover:text-secondary'" class="font-body-md text-body-md cursor-pointer active:scale-95 transition-colors duration-200">Berita</a>
-            <a href="{{ url('/#activities') }}" @click="activeSection = 'activities'" :class="activeSection === 'activities' ? 'text-primary font-bold border-b-2 border-secondary' : 'text-on-surface-variant hover:text-secondary'" class="font-body-md text-body-md cursor-pointer active:scale-95 transition-colors duration-200">Kegiatan</a>
-            <a href="{{ url('/#gallery') }}" @click="activeSection = 'gallery'" :class="activeSection === 'gallery' ? 'text-primary font-bold border-b-2 border-secondary' : 'text-on-surface-variant hover:text-secondary'" class="font-body-md text-body-md cursor-pointer active:scale-95 transition-colors duration-200">Galeri</a>
-            <a href="{{ url('/#faq') }}" @click="activeSection = 'faq'" :class="activeSection === 'faq' ? 'text-primary font-bold border-b-2 border-secondary' : 'text-on-surface-variant hover:text-secondary'" class="font-body-md text-body-md cursor-pointer active:scale-95 transition-colors duration-200">FAQ</a>
-            <a href="{{ url('/#contact') }}" @click="activeSection = 'contact'" :class="activeSection === 'contact' ? 'text-primary font-bold border-b-2 border-secondary' : 'text-on-surface-variant hover:text-secondary'" class="font-body-md text-body-md cursor-pointer active:scale-95 transition-colors duration-200">Kontak</a>
+            <a href="{{ url('/') }}" @click.prevent="goTo('home', '/')" :class="activeSection === 'home' ? 'text-primary font-bold border-b-2 border-secondary' : 'text-on-surface-variant hover:text-secondary'" class="font-body-md text-body-md cursor-pointer active:scale-95 transition-colors duration-200">Beranda</a>
+            <a href="{{ url('/tentang') }}" @click.prevent="goTo('about', '/tentang')" :class="activeSection === 'about' ? 'text-primary font-bold border-b-2 border-secondary' : 'text-on-surface-variant hover:text-secondary'" class="font-body-md text-body-md cursor-pointer active:scale-95 transition-colors duration-200">Tentang</a>
+            <a href="{{ url('/berita') }}" @click.prevent="goTo('news', '/berita')" :class="activeSection === 'news' ? 'text-primary font-bold border-b-2 border-secondary' : 'text-on-surface-variant hover:text-secondary'" class="font-body-md text-body-md cursor-pointer active:scale-95 transition-colors duration-200">Berita</a>
+            <a href="{{ url('/kegiatan') }}" @click.prevent="goTo('activities', '/kegiatan')" :class="activeSection === 'activities' ? 'text-primary font-bold border-b-2 border-secondary' : 'text-on-surface-variant hover:text-secondary'" class="font-body-md text-body-md cursor-pointer active:scale-95 transition-colors duration-200">Kegiatan</a>
+            <a href="{{ url('/galeri') }}" @click.prevent="goTo('gallery', '/galeri')" :class="activeSection === 'gallery' ? 'text-primary font-bold border-b-2 border-secondary' : 'text-on-surface-variant hover:text-secondary'" class="font-body-md text-body-md cursor-pointer active:scale-95 transition-colors duration-200">Galeri</a>
+            <a href="{{ url('/faq') }}" @click.prevent="goTo('faq', '/faq')" :class="activeSection === 'faq' ? 'text-primary font-bold border-b-2 border-secondary' : 'text-on-surface-variant hover:text-secondary'" class="font-body-md text-body-md cursor-pointer active:scale-95 transition-colors duration-200">FAQ</a>
+            <a href="{{ url('/kontak') }}" @click.prevent="goTo('contact', '/kontak')" :class="activeSection === 'contact' ? 'text-primary font-bold border-b-2 border-secondary' : 'text-on-surface-variant hover:text-secondary'" class="font-body-md text-body-md cursor-pointer active:scale-95 transition-colors duration-200">Kontak</a>
             @auth
                 <a href="{{ route('admin.dashboard') }}" class="bg-primary text-on-primary px-6 py-2.5 rounded-full font-label-md text-label-md hover:bg-primary-container transition-all active:scale-95 shadow-sm">Dashboard</a>
             @else
@@ -47,13 +57,13 @@
     </div>
     <div x-show="mobileMenu" x-transition class="md:hidden bg-white border-t border-primary/10" style="display: none;">
         <div class="px-margin-mobile py-stack-md space-y-stack-sm">
-            <a href="{{ url('/#home') }}" @click="mobileMenu = false" class="block font-label-md text-label-md text-primary font-bold py-2">Beranda</a>
-            <a href="{{ url('/#about') }}" @click="mobileMenu = false" class="block font-label-md text-label-md text-on-surface-variant hover:text-secondary py-2">Tentang</a>
-            <a href="{{ url('/#news') }}" @click="mobileMenu = false" class="block font-label-md text-label-md text-on-surface-variant hover:text-secondary py-2">Berita</a>
-            <a href="{{ url('/#activities') }}" @click="mobileMenu = false" class="block font-label-md text-label-md text-on-surface-variant hover:text-secondary py-2">Kegiatan</a>
-            <a href="{{ url('/#gallery') }}" @click="mobileMenu = false" class="block font-label-md text-label-md text-on-surface-variant hover:text-secondary py-2">Galeri</a>
-            <a href="{{ url('/#faq') }}" @click="mobileMenu = false" class="block font-label-md text-label-md text-on-surface-variant hover:text-secondary py-2">FAQ</a>
-            <a href="{{ url('/#contact') }}" @click="mobileMenu = false" class="block font-label-md text-label-md text-on-surface-variant hover:text-secondary py-2">Kontak</a>
+            <a href="{{ url('/') }}" @click.prevent="goTo('home', '/')" class="block font-label-md text-label-md text-primary font-bold py-2">Beranda</a>
+            <a href="{{ url('/tentang') }}" @click.prevent="goTo('about', '/tentang')" class="block font-label-md text-label-md text-on-surface-variant hover:text-secondary py-2">Tentang</a>
+            <a href="{{ url('/berita') }}" @click.prevent="goTo('news', '/berita')" class="block font-label-md text-label-md text-on-surface-variant hover:text-secondary py-2">Berita</a>
+            <a href="{{ url('/kegiatan') }}" @click.prevent="goTo('activities', '/kegiatan')" class="block font-label-md text-label-md text-on-surface-variant hover:text-secondary py-2">Kegiatan</a>
+            <a href="{{ url('/galeri') }}" @click.prevent="goTo('gallery', '/galeri')" class="block font-label-md text-label-md text-on-surface-variant hover:text-secondary py-2">Galeri</a>
+            <a href="{{ url('/faq') }}" @click.prevent="goTo('faq', '/faq')" class="block font-label-md text-label-md text-on-surface-variant hover:text-secondary py-2">FAQ</a>
+            <a href="{{ url('/kontak') }}" @click.prevent="goTo('contact', '/kontak')" class="block font-label-md text-label-md text-on-surface-variant hover:text-secondary py-2">Kontak</a>
             <div class="pt-stack-sm border-t border-outline-variant/30">
                 @auth
                     <a href="{{ route('admin.dashboard') }}" class="block text-center bg-primary text-on-primary px-6 py-2.5 rounded-full font-label-md">Dashboard</a>
@@ -92,13 +102,13 @@
             <div>
                 <h5 class="font-label-md text-label-md text-secondary-fixed uppercase mb-3 tracking-widest">Navigasi</h5>
                 <ul class="space-y-2">
-                    <li><a href="{{ url('/#home') }}" class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed transition-colors">Beranda</a></li>
-                    <li><a href="{{ url('/#about') }}" class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed transition-colors">Tentang</a></li>
-                    <li><a href="{{ url('/#news') }}" class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed transition-colors">Berita</a></li>
-                    <li><a href="{{ url('/#activities') }}" class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed transition-colors">Kegiatan</a></li>
-                    <li><a href="{{ url('/#gallery') }}" class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed transition-colors">Galeri</a></li>
-                    <li><a href="{{ url('/#faq') }}" class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed transition-colors">FAQ</a></li>
-                    <li><a href="{{ url('/#contact') }}" class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed transition-colors">Kontak</a></li>
+                    <li><a href="{{ url('/') }}" class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed transition-colors">Beranda</a></li>
+                    <li><a href="{{ url('/tentang') }}" class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed transition-colors">Tentang</a></li>
+                    <li><a href="{{ url('/berita') }}" class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed transition-colors">Berita</a></li>
+                    <li><a href="{{ url('/kegiatan') }}" class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed transition-colors">Kegiatan</a></li>
+                    <li><a href="{{ url('/galeri') }}" class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed transition-colors">Galeri</a></li>
+                    <li><a href="{{ url('/faq') }}" class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed transition-colors">FAQ</a></li>
+                    <li><a href="{{ url('/kontak') }}" class="font-body-md text-body-md text-on-primary/80 hover:text-secondary-fixed transition-colors">Kontak</a></li>
                 </ul>
             </div>
             <div>
@@ -124,10 +134,21 @@
 document.addEventListener('DOMContentLoaded', () => {
     const nav = document.querySelector('nav[x-data]');
     if (!nav) return;
+
+    const pathToSection = { '/': 'home', '/tentang': 'about', '/berita': 'news', '/kegiatan': 'activities', '/galeri': 'gallery', '/faq': 'faq', '/kontak': 'contact' };
+    const targetSection = pathToSection[window.location.pathname] || 'home';
+    const targetEl = document.getElementById(targetSection);
+
+    if (targetEl && targetSection !== 'home') {
+        setTimeout(() => targetEl.scrollIntoView({ behavior: 'smooth' }), 100);
+    }
+
+    if (nav.__x) nav.__x.$data.activeSection = targetSection;
+
     const sections = document.querySelectorAll('section[id]');
     if (!sections.length) return;
     const observer = new IntersectionObserver((entries) => {
-        let maxRatio = 0, maxId = 'home';
+        let maxRatio = 0, maxId = targetSection;
         entries.forEach(e => {
             if (e.intersectionRatio > maxRatio) {
                 maxRatio = e.intersectionRatio;

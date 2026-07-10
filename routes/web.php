@@ -7,6 +7,12 @@ use App\Http\Controllers\PublicController;
 
 // Public Routes
 Route::get('/', [PublicController::class, 'home'])->name('home');
+Route::get('/tentang', [PublicController::class, 'home'])->name('tentang');
+Route::get('/berita', [PublicController::class, 'home'])->name('berita');
+Route::get('/kegiatan', [PublicController::class, 'home'])->name('kegiatan');
+Route::get('/galeri', [PublicController::class, 'home'])->name('galeri');
+Route::get('/faq', [PublicController::class, 'home'])->name('faq');
+Route::get('/kontak', [PublicController::class, 'home'])->name('kontak');
 Route::get('/berita/{news}', [PublicController::class, 'newsDetail'])->name('news.show');
 Route::get('/kegiatan/{activity}', [PublicController::class, 'activityDetail'])->name('activity.show');
 Route::post('/contact', [PublicController::class, 'storeMessage'])->name('contact.store');
