@@ -146,11 +146,6 @@ document.addEventListener('DOMContentLoaded',()=>{
     </div>
 </section>
 
-@php
-    $principal = $sambutans->firstWhere('role', 'Kepala Sekolah');
-    $teachers = $sambutans->where('role', '!=', 'Kepala Sekolah');
-@endphp
-
 <!-- KATA SAMBUTAN KEPALA SEKOLAH -->
 @if($principal)
 <section id="sambutan" class="py-section-gap bg-surface-container-low">

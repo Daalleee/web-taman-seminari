@@ -82,6 +82,10 @@
             <div class="pt-3 pb-1">
                 <p class="px-4 text-[11px] uppercase tracking-widest text-white/30 font-semibold">Pengaturan</p>
             </div>
+            <a href="{{ route('admin.users') }}" @click="sidebarOpen = false" class="flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all duration-200 text-sm {{ request()->routeIs('admin.users') ? 'bg-primary-container text-white font-semibold border-l-2 border-secondary' : 'text-white/70 hover:bg-white/10 hover:text-white' }}">
+                <span class="material-symbols-outlined text-[20px]">manage_accounts</span>
+                Pengguna
+            </a>
             <a href="{{ route('admin.settings.profile') }}" @click="sidebarOpen = false" class="flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all duration-200 text-sm {{ request()->routeIs('admin.settings.profile') ? 'bg-primary-container text-white font-semibold border-l-2 border-secondary' : 'text-white/70 hover:bg-white/10 hover:text-white' }}">
                 <span class="material-symbols-outlined text-[20px]">school</span>
                 Profil Sekolah

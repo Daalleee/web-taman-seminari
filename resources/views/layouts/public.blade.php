@@ -3,7 +3,35 @@
 <head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title>@yield('title', 'Taman Seminari TK')</title>
+<meta name="description" content="Taman Seminari Santo Mikael - TK Katolik yang mendidik anak dengan kasih, membimbing dengan iman, dan mempersiapkan masa depan gemilang.">
+<meta name="keywords" content="Taman Seminari, Santo Mikael, TK Katolik, Pendidikan Anak, TK Seminari">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="{{ url()->current() }}">
+
+<meta property="og:title" content="@yield('title', 'Taman Seminari Santo Mikael')">
+<meta property="og:description" content="TK Katolik yang mendidik anak dengan kasih, membimbing dengan iman, dan mempersiapkan masa depan gemilang.">
+<meta property="og:url" content="{{ url()->current() }}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Taman Seminari Santo Mikael">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="@yield('title', 'Taman Seminari Santo Mikael')">
+<meta name="twitter:description" content="TK Katolik yang mendidik anak dengan kasih, membimbing dengan iman, dan mempersiapkan masa depan gemilang.">
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "School",
+    "name": "Taman Seminari Santo Mikael",
+    "url": "https://seminari.santomikael.com",
+    "description": "TK Katolik yang mendidik anak dengan kasih, membimbing dengan iman, dan mempersiapkan masa depan gemilang.",
+    "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "ID"
+    }
+}
+</script>
+
+<title>@yield('title', 'Taman Seminari Santo Mikael')</title>
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">

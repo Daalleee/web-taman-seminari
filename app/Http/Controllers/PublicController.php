@@ -8,7 +8,8 @@ use App\Models\News;
 use App\Models\Activity;
 use App\Models\Gallery;
 use App\Models\Message;
-use App\Models\Sambutan;
+use App\Models\Teacher;
+use App\Models\Principal;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 
@@ -21,10 +22,11 @@ class PublicController extends Controller
         $newsList = News::latest()->get();
         $activities = Activity::latest()->take(6)->get();
         $galleries = Gallery::latest()->take(8)->get();
-        $sambutans = Sambutan::where('is_active', true)->orderBy('order')->get();
+        $principal = Principal::where('is_active', true)->first();
+        $teachers = Teacher::where('is_active', true)->orderBy('order')->get();
         $settings = Setting::all()->pluck('value', 'key');
 
-        return view('public.home', compact('banners', 'faqs', 'newsList', 'activities', 'galleries', 'sambutans', 'settings'));
+        return view('public.home', compact('banners', 'faqs', 'newsList', 'activities', 'galleries', 'principal', 'teachers', 'settings'));
     }
 
     public function storeMessage(Request $request)

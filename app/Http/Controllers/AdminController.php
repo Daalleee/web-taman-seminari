@@ -10,8 +10,11 @@ use App\Models\Activity;
 use App\Models\Gallery;
 use App\Models\Message;
 use App\Models\Setting;
-use App\Models\Sambutan;
+use App\Models\Teacher;
+use App\Models\Principal;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -203,11 +206,11 @@ class AdminController extends Controller
     // --- KEPALA SEKOLAH ---
     public function principal()
     {
-        $principal = Sambutan::where('role', 'Kepala Sekolah')->firstOrNew([]);
+        $principal = Principal::firstOrNew([]);
         return view('admin.principal', compact('principal'));
     }
 
-    public function updatePrincipal(Request $request, Sambutan $sambutan)
+    public function updatePrincipal(Request $request)
     {
         $request->validate([
             'name' => 'required|max:255',
@@ -215,19 +218,20 @@ class AdminController extends Controller
             'photo' => 'nullable|image',
         ]);
         $data = $request->only(['name', 'content']);
-        $data['role'] = 'Kepala Sekolah';
+        $data['is_active'] = true;
         if ($request->hasFile('photo')) {
-            if ($sambutan->photo_path) Storage::disk('public')->delete($sambutan->photo_path);
-            $data['photo_path'] = $request->file('photo')->store('sambutans', 'public');
+            $principal = Principal::first();
+            if ($principal && $principal->photo_path) Storage::disk('public')->delete($principal->photo_path);
+            $data['photo_path'] = $request->file('photo')->store('principals', 'public');
         }
-        $sambutan->update($data);
+        Principal::updateOrCreate(['id' => 1], $data);
         return back()->with('success', 'Data kepala sekolah berhasil diperbarui');
     }
 
     // --- GURU ---
     public function teachers()
     {
-        $teachers = Sambutan::where('role', '!=', 'Kepala Sekolah')->get();
+        $teachers = Teacher::latest()->get();
         return view('admin.teachers', compact('teachers'));
     }
 
@@ -241,13 +245,13 @@ class AdminController extends Controller
         $data = $request->only(['name', 'role']);
         $data['content'] = $request->content ?? '';
         if ($request->hasFile('photo')) {
-            $data['photo_path'] = $request->file('photo')->store('sambutans', 'public');
+            $data['photo_path'] = $request->file('photo')->store('teachers', 'public');
         }
-        Sambutan::create($data);
+        Teacher::create($data);
         return back()->with('success', 'Guru berhasil ditambahkan');
     }
 
-    public function updateTeacher(Request $request, Sambutan $sambutan)
+    public function updateTeacher(Request $request, Teacher $teacher)
     {
         $request->validate([
             'name' => 'required|max:255',
@@ -257,17 +261,17 @@ class AdminController extends Controller
         $data = $request->only(['name', 'role']);
         $data['content'] = $request->content ?? '';
         if ($request->hasFile('photo')) {
-            if ($sambutan->photo_path) Storage::disk('public')->delete($sambutan->photo_path);
-            $data['photo_path'] = $request->file('photo')->store('sambutans', 'public');
+            if ($teacher->photo_path) Storage::disk('public')->delete($teacher->photo_path);
+            $data['photo_path'] = $request->file('photo')->store('teachers', 'public');
         }
-        $sambutan->update($data);
+        $teacher->update($data);
         return back()->with('success', 'Data guru berhasil diperbarui');
     }
 
-    public function deleteTeacher(Sambutan $sambutan)
+    public function deleteTeacher(Teacher $teacher)
     {
-        if ($sambutan->photo_path) Storage::disk('public')->delete($sambutan->photo_path);
-        $sambutan->delete();
+        if ($teacher->photo_path) Storage::disk('public')->delete($teacher->photo_path);
+        $teacher->delete();
         return back()->with('success', 'Guru berhasil dihapus');
     }
 
@@ -361,5 +365,38 @@ class AdminController extends Controller
     {
         $this->saveSettings($request->except(['_token']));
         return back()->with('success', 'Jam operasional berhasil diperbarui');
+    }
+
+    // --- USER MANAGEMENT ---
+    public function users()
+    {
+        $users = User::latest()->get();
+        return view('admin.users', compact('users'));
+    }
+
+    public function storeUser(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|min:6',
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return back()->with('success', 'Admin berhasil ditambahkan');
+    }
+
+    public function deleteUser(User $user)
+    {
+        if ($user->id === auth()->id()) {
+            return back()->withErrors(['Tidak bisa menghapus akun sendiri.']);
+        }
+        $user->delete();
+        return back()->with('success', 'Admin berhasil dihapus');
     }
 }

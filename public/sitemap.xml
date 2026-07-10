@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://seminari.santomikael.com/</loc>
+        <priority>1.0</priority>
+    </url>
+    <url>
+        <loc>https://seminari.santomikael.com/tentang</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://seminari.santomikael.com/berita</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://seminari.santomikael.com/kegiatan</loc>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://seminari.santomikael.com/galeri</loc>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://seminari.santomikael.com/faq</loc>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://seminari.santomikael.com/kontak</loc>
+        <priority>0.7</priority>
+    </url>
+</urlset>

@@ -17,6 +17,15 @@ Route::get('/berita/{news}', [PublicController::class, 'newsDetail'])->name('new
 Route::get('/kegiatan/{activity}', [PublicController::class, 'activityDetail'])->name('activity.show');
 Route::post('/contact', [PublicController::class, 'storeMessage'])->name('contact.store');
 
+// Serve storage images without symlink
+Route::get('/storage/{path}', function (string $path) {
+    $fullPath = storage_path('app/public/' . $path);
+    if (!file_exists($fullPath)) {
+        abort(404);
+    }
+    return response()->file($fullPath);
+})->where('path', '.*');
+
 // Auth Routes
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login')->middleware('guest');
 Route::post('/login', [AuthController::class, 'login']);
@@ -53,12 +62,12 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::delete('/galleries/{gallery}', [AdminController::class, 'deleteGallery'])->name('admin.galleries.delete');
 
     Route::get('/principal', [AdminController::class, 'principal'])->name('admin.principal');
-    Route::post('/principal/{sambutan}', [AdminController::class, 'updatePrincipal'])->name('admin.principal.update');
+    Route::post('/principal', [AdminController::class, 'updatePrincipal'])->name('admin.principal.update');
 
     Route::get('/teachers', [AdminController::class, 'teachers'])->name('admin.teachers');
     Route::post('/teachers', [AdminController::class, 'storeTeacher']);
-    Route::post('/teachers/{sambutan}', [AdminController::class, 'updateTeacher'])->name('admin.teachers.update');
-    Route::delete('/teachers/{sambutan}', [AdminController::class, 'deleteTeacher'])->name('admin.teachers.delete');
+    Route::post('/teachers/{teacher}', [AdminController::class, 'updateTeacher'])->name('admin.teachers.update');
+    Route::delete('/teachers/{teacher}', [AdminController::class, 'deleteTeacher'])->name('admin.teachers.delete');
 
     Route::get('/messages', [AdminController::class, 'messages'])->name('admin.messages');
     Route::get('/messages/{message}', [AdminController::class, 'showMessage'])->name('admin.messages.show');
@@ -74,5 +83,10 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/settings/contact', [AdminController::class, 'storeSettingsContact']);
     Route::get('/settings/operational-hours', [AdminController::class, 'settingsOperationalHours'])->name('admin.settings.operational-hours');
     Route::post('/settings/operational-hours', [AdminController::class, 'storeSettingsOperationalHours']);
+
+    // User Management
+    Route::get('/users', [AdminController::class, 'users'])->name('admin.users');
+    Route::post('/users', [AdminController::class, 'storeUser']);
+    Route::delete('/users/{user}', [AdminController::class, 'deleteUser'])->name('admin.users.delete');
 });
 

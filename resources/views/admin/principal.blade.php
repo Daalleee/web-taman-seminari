@@ -29,7 +29,6 @@
                 <div class="flex items-start justify-between mb-4">
                     <div>
                         <h3 class="font-headline-sm text-headline-sm text-primary">{{ $principal->name }}</h3>
-                        <p class="text-sm text-slate-500 mt-1">{{ $principal->role }}</p>
                     </div>
                     <button @click="activeItem = {{ json_encode($principal) }}; editModal = true" class="px-4 py-2 text-sm bg-secondary hover:bg-primary text-white rounded-xl transition-colors flex items-center gap-1.5 shrink-0 ml-4">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
@@ -46,7 +45,11 @@
     <div class="mt-6 bg-white rounded-2xl p-12 border border-slate-100 text-center">
         <span class="material-symbols-outlined text-5xl text-slate-300 block mb-4">school</span>
         <h3 class="text-lg font-medium text-slate-800">Belum Ada Data</h3>
-        <p class="text-slate-500 mt-1">Data kepala sekolah belum ditambahkan. Hubungi pengembang untuk menambahkan data awal.</p>
+        <p class="text-slate-500 mt-1">Tambahkan data kepala sekolah.</p>
+        <button @click="editModal = true" class="mt-4 px-5 py-2.5 bg-primary text-white rounded-xl font-medium hover:bg-primary-container transition-colors shadow-sm inline-flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+            Tambah Data
+        </button>
     </div>
     @endif
 
@@ -56,7 +59,7 @@
             <div class="flex items-center justify-center min-h-screen px-4 sm:p-0">
                 <div x-show="editModal" @click="editModal=false" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm"></div>
                 <div x-show="editModal" x-transition class="bg-white rounded-2xl shadow-2xl sm:max-w-lg w-full border border-slate-100 relative z-10">
-                    <form :action="`/admin/principal/${activeItem.id}`" method="POST" enctype="multipart/form-data">@csrf
+                    <form action="{{ route('admin.principal.update') }}" method="POST" enctype="multipart/form-data">@csrf
                         <div class="px-6 py-5 border-b border-slate-100 flex justify-between items-center">
                             <h3 class="text-lg font-semibold text-slate-800">Edit Kepala Sekolah</h3>
                             <button type="button" @click="editModal=false" class="text-slate-400 hover:text-slate-600"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
