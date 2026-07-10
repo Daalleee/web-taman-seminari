@@ -10,6 +10,7 @@ use App\Models\Activity;
 use App\Models\Gallery;
 use App\Models\Message;
 use App\Models\Setting;
+use App\Models\Sambutan;
 use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
@@ -94,7 +95,7 @@ class AdminController extends Controller
     // --- NEWS ---
     public function news()
     {
-        $news = News::latest('published_at')->get();
+        $news = News::latest()->get();
         return view('admin.news', compact('news'));
     }
 
@@ -130,7 +131,7 @@ class AdminController extends Controller
     // --- ACTIVITIES ---
     public function activities()
     {
-        $activities = Activity::orderBy('activity_date', 'desc')->get();
+        $activities = Activity::latest()->get();
         return view('admin.activities', compact('activities'));
     }
 
@@ -166,7 +167,7 @@ class AdminController extends Controller
     // --- GALLERIES ---
     public function galleries()
     {
-        $galleries = Gallery::all();
+        $galleries = Gallery::latest()->get();
         return view('admin.galleries', compact('galleries'));
     }
 
@@ -197,6 +198,77 @@ class AdminController extends Controller
         Storage::disk('public')->delete($gallery->image_path);
         $gallery->delete();
         return back()->with('success', 'Foto berhasil dihapus');
+    }
+
+    // --- KEPALA SEKOLAH ---
+    public function principal()
+    {
+        $principal = Sambutan::where('role', 'Kepala Sekolah')->firstOrNew([]);
+        return view('admin.principal', compact('principal'));
+    }
+
+    public function updatePrincipal(Request $request, Sambutan $sambutan)
+    {
+        $request->validate([
+            'name' => 'required|max:255',
+            'content' => 'required',
+            'photo' => 'nullable|image',
+        ]);
+        $data = $request->only(['name', 'content']);
+        $data['role'] = 'Kepala Sekolah';
+        if ($request->hasFile('photo')) {
+            if ($sambutan->photo_path) Storage::disk('public')->delete($sambutan->photo_path);
+            $data['photo_path'] = $request->file('photo')->store('sambutans', 'public');
+        }
+        $sambutan->update($data);
+        return back()->with('success', 'Data kepala sekolah berhasil diperbarui');
+    }
+
+    // --- GURU ---
+    public function teachers()
+    {
+        $teachers = Sambutan::where('role', '!=', 'Kepala Sekolah')->get();
+        return view('admin.teachers', compact('teachers'));
+    }
+
+    public function storeTeacher(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|max:255',
+            'role' => 'required|max:255',
+            'photo' => 'nullable|image',
+        ]);
+        $data = $request->only(['name', 'role']);
+        $data['content'] = $request->content ?? '';
+        if ($request->hasFile('photo')) {
+            $data['photo_path'] = $request->file('photo')->store('sambutans', 'public');
+        }
+        Sambutan::create($data);
+        return back()->with('success', 'Guru berhasil ditambahkan');
+    }
+
+    public function updateTeacher(Request $request, Sambutan $sambutan)
+    {
+        $request->validate([
+            'name' => 'required|max:255',
+            'role' => 'required|max:255',
+            'photo' => 'nullable|image',
+        ]);
+        $data = $request->only(['name', 'role']);
+        $data['content'] = $request->content ?? '';
+        if ($request->hasFile('photo')) {
+            if ($sambutan->photo_path) Storage::disk('public')->delete($sambutan->photo_path);
+            $data['photo_path'] = $request->file('photo')->store('sambutans', 'public');
+        }
+        $sambutan->update($data);
+        return back()->with('success', 'Data guru berhasil diperbarui');
+    }
+
+    public function deleteTeacher(Sambutan $sambutan)
+    {
+        if ($sambutan->photo_path) Storage::disk('public')->delete($sambutan->photo_path);
+        $sambutan->delete();
+        return back()->with('success', 'Guru berhasil dihapus');
     }
 
     // --- MESSAGES ---

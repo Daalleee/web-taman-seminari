@@ -146,6 +146,72 @@ document.addEventListener('DOMContentLoaded',()=>{
     </div>
 </section>
 
+@php
+    $principal = $sambutans->firstWhere('role', 'Kepala Sekolah');
+    $teachers = $sambutans->where('role', '!=', 'Kepala Sekolah');
+@endphp
+
+<!-- KATA SAMBUTAN KEPALA SEKOLAH -->
+@if($principal)
+<section id="sambutan" class="py-section-gap bg-surface-container-low">
+    <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
+        <div class="text-center mb-16 fade-in">
+            <h2 class="font-headline-lg text-headline-lg text-primary mb-4">Kata Sambutan</h2>
+            <p class="font-body-md text-body-md text-on-surface-variant max-w-[700px] mx-auto">Sambutan dari kepala sekolah Taman Seminari.</p>
+        </div>
+        <div class="max-w-5xl mx-auto fade-in">
+            <div class="bg-white rounded-2xl overflow-hidden shadow-md border border-primary/5 flex flex-col md:flex-row">
+                <div class="md:w-96 lg:w-[28rem] shrink-0 flex items-center justify-center p-8">
+                    @if($principal->photo_path)
+                        <div class="w-full border-4 border-primary/20 rounded-xl overflow-hidden shadow-lg bg-white">
+                            <img src="{{ asset('storage/'.$principal->photo_path) }}" alt="{{ $principal->name }}" class="w-full aspect-[4/3] object-cover">
+                        </div>
+                    @else
+                        <div class="w-full aspect-[4/3] flex items-center justify-center border-4 border-primary/20 rounded-xl bg-primary/5">
+                            <span class="material-symbols-outlined text-primary text-7xl">person</span>
+                        </div>
+                    @endif
+                </div>
+                <div class="flex-1 p-8 md:p-10 flex flex-col justify-center">
+                    <h3 class="font-headline-sm text-headline-sm text-primary mb-1">{{ $principal->name }}</h3>
+                    <p class="font-label-md text-label-md text-secondary mb-4">{{ $principal->role }}</p>
+                    <div class="font-body-md text-body-md text-on-surface-variant leading-relaxed space-y-3">
+                        {{ $principal->content }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@endif
+
+<!-- TENAGA PENDIDIK -->
+@if($teachers->count() > 0)
+<section class="py-section-gap">
+    <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter">
+        <div class="text-center mb-16 fade-in">
+            <h2 class="font-headline-lg text-headline-lg text-primary mb-4">Guru</h2>
+            <p class="font-body-md text-body-md text-on-surface-variant max-w-[700px] mx-auto">Guru-guru yang berdedikasi mendampingi tumbuh kembang anak-anak.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 fade-in max-w-3xl mx-auto">
+            @foreach($teachers as $teacher)
+            <div class="bg-white rounded-2xl overflow-hidden shadow-md border border-primary/10 p-10 text-center hover-lift">
+                <div class="w-36 h-36 mx-auto rounded-full overflow-hidden bg-primary/10 flex items-center justify-center border-[6px] border-primary/20 shadow-lg mb-6">
+                    @if($teacher->photo_path)
+                        <img src="{{ asset('storage/'.$teacher->photo_path) }}" alt="{{ $teacher->name }}" class="w-full h-full object-cover">
+                    @else
+                        <span class="material-symbols-outlined text-primary text-6xl">person</span>
+                    @endif
+                </div>
+                <h3 class="font-headline-md text-headline-md text-primary">{{ $teacher->name }}</h3>
+                <p class="font-label-lg text-label-lg text-secondary mt-2">{{ $teacher->role }}</p>
+            </div>
+            @endforeach
+        </div>
+    </div>
+</section>
+@endif
+
 <!-- BERITA -->
 <section id="news" class="py-section-gap overflow-hidden">
     <div class="max-w-container-max mx-auto px-margin-mobile md:px-gutter">

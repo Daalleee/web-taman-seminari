@@ -51,7 +51,15 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::post('/galleries', [AdminController::class, 'storeGallery']);
     Route::post('/galleries/{gallery}', [AdminController::class, 'updateGallery'])->name('admin.galleries.update');
     Route::delete('/galleries/{gallery}', [AdminController::class, 'deleteGallery'])->name('admin.galleries.delete');
-    
+
+    Route::get('/principal', [AdminController::class, 'principal'])->name('admin.principal');
+    Route::post('/principal/{sambutan}', [AdminController::class, 'updatePrincipal'])->name('admin.principal.update');
+
+    Route::get('/teachers', [AdminController::class, 'teachers'])->name('admin.teachers');
+    Route::post('/teachers', [AdminController::class, 'storeTeacher']);
+    Route::post('/teachers/{sambutan}', [AdminController::class, 'updateTeacher'])->name('admin.teachers.update');
+    Route::delete('/teachers/{sambutan}', [AdminController::class, 'deleteTeacher'])->name('admin.teachers.delete');
+
     Route::get('/messages', [AdminController::class, 'messages'])->name('admin.messages');
     Route::get('/messages/{message}', [AdminController::class, 'showMessage'])->name('admin.messages.show');
     Route::delete('/messages/{message}', [AdminController::class, 'deleteMessage'])->name('admin.messages.delete');

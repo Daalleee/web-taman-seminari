@@ -8,6 +8,7 @@ use App\Models\News;
 use App\Models\Activity;
 use App\Models\Gallery;
 use App\Models\Message;
+use App\Models\Sambutan;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 
@@ -17,12 +18,13 @@ class PublicController extends Controller
     {
         $banners = Banner::where('is_active', true)->get();
         $faqs = Faq::orderBy('order')->get();
-        $newsList = News::orderBy('published_at', 'desc')->get();
-        $activities = Activity::orderBy('activity_date', 'desc')->take(6)->get();
+        $newsList = News::latest()->get();
+        $activities = Activity::latest()->take(6)->get();
         $galleries = Gallery::latest()->take(8)->get();
+        $sambutans = Sambutan::where('is_active', true)->orderBy('order')->get();
         $settings = Setting::all()->pluck('value', 'key');
 
-        return view('public.home', compact('banners', 'faqs', 'newsList', 'activities', 'galleries', 'settings'));
+        return view('public.home', compact('banners', 'faqs', 'newsList', 'activities', 'galleries', 'sambutans', 'settings'));
     }
 
     public function storeMessage(Request $request)
@@ -41,14 +43,14 @@ class PublicController extends Controller
     public function newsDetail(News $news)
     {
         $settings = Setting::all()->pluck('value', 'key');
-        $latestNews = News::where('id', '!=', $news->id)->orderBy('published_at', 'desc')->take(3)->get();
+        $latestNews = News::where('id', '!=', $news->id)->latest()->take(3)->get();
         return view('public.news-detail', compact('news', 'settings', 'latestNews'));
     }
 
     public function activityDetail(Activity $activity)
     {
         $settings = Setting::all()->pluck('value', 'key');
-        $latestActivities = Activity::where('id', '!=', $activity->id)->orderBy('activity_date', 'desc')->take(3)->get();
+        $latestActivities = Activity::where('id', '!=', $activity->id)->latest()->take(3)->get();
         return view('public.activity-detail', compact('activity', 'settings', 'latestActivities'));
     }
 }

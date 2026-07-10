@@ -28,8 +28,12 @@
     goTo(section, url) {
         this.activeSection = section;
         this.mobileMenu = false;
-        window.history.pushState(null, '', url);
-        document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });
+        if (document.getElementById(section)) {
+            window.history.pushState(null, '', url);
+            document.getElementById(section).scrollIntoView({ behavior: 'smooth' });
+        } else {
+            window.location.href = url;
+        }
     }
 }" @scroll.window="scrolled = (window.pageYOffset > 20)"
      class="w-full top-0 sticky z-50 bg-surface dark:bg-surface-container-low border-b border-primary/10 transition-all duration-300"
@@ -136,7 +140,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!nav) return;
 
     const pathToSection = { '/': 'home', '/tentang': 'about', '/berita': 'news', '/kegiatan': 'activities', '/galeri': 'gallery', '/faq': 'faq', '/kontak': 'contact' };
-    const targetSection = pathToSection[window.location.pathname] || 'home';
+    const path = window.location.pathname;
+    const matchedKey = Object.keys(pathToSection).find(k => path === k || path.startsWith(k + '/'));
+    const targetSection = matchedKey ? pathToSection[matchedKey] : 'home';
     const targetEl = document.getElementById(targetSection);
 
     if (targetEl && targetSection !== 'home') {

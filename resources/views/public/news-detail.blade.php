@@ -23,7 +23,6 @@ document.addEventListener('DOMContentLoaded',()=>{
             <span class="material-symbols-outlined text-[18px]">arrow_back</span>
             Kembali ke Berita
         </a>
-        <span class="inline-block px-4 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md mb-4">Berita</span>
         <h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary mb-4">{{ $news->title }}</h1>
         <p class="font-body-md text-body-md text-on-surface-variant flex items-center gap-2">
             <span class="material-symbols-outlined text-[18px]">calendar_today</span>

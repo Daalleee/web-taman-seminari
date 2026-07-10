@@ -17,8 +17,8 @@
         </div>
     </div>
 
-    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-        <table class="w-full text-left border-collapse">
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-x-auto">
+        <table class="w-full text-left border-collapse min-w-[600px]">
             <thead>
                 <tr class="bg-slate-50 border-b border-slate-100">
                     <th class="py-4 px-6 text-sm font-semibold text-slate-600">Status</th>

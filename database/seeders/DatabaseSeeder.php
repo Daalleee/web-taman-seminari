@@ -9,6 +9,7 @@ use App\Models\News;
 use App\Models\Activity;
 use App\Models\Gallery;
 use App\Models\Faq;
+use App\Models\Sambutan;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -27,6 +28,7 @@ class DatabaseSeeder extends Seeder
         $this->seedActivities();
         $this->seedGalleries();
         $this->seedFaqs();
+        $this->seedSambutans();
     }
 
     private function seedSettings(): void
@@ -184,6 +186,36 @@ class DatabaseSeeder extends Seeder
         ];
         foreach ($faqs as $data) {
             Faq::firstOrCreate(['question' => $data['question']], $data);
+        }
+    }
+
+    private function seedSambutans(): void
+    {
+        $sambutans = [
+            [
+                'name' => 'Sr. Maria Angela, SSpS',
+                'role' => 'Kepala Sekolah',
+                'content' => 'Selamat datang di Taman Seminari TK. Kami percaya bahwa setiap anak adalah anugerah Tuhan yang unik dan berharga. Di sini, kami tidak hanya mendidik anak-anak dalam pengetahuan akademis, tetapi juga menanamkan nilai-nilai iman Kristiani yang akan menjadi fondasi kuat bagi kehidupan mereka. Dengan pendekatan kasih dan kegembiraan, kami berkomitmen untuk membimbing setiap anak agar bertumbuh menjadi pribadi yang cerdas, berkarakter mulia, dan beriman teguh. Mari bergabung bersama kami dalam perjalanan pendidikan yang penuh berkat ini.',
+                'order' => 1,
+                'is_active' => true,
+            ],
+            [
+                'name' => 'Ibu Yohana Wati, S.Pd.',
+                'role' => 'Guru Kelas TK A',
+                'content' => 'Sebagai guru, saya bersyukur dapat menjadi bagian dari tumbuh kembang anak-anak setiap harinya. Melihat senyum dan semangat mereka dalam belajar adalah kebahagiaan tersendiri. Di Taman Seminari, kami menciptakan lingkungan belajar yang aman, menyenangkan, dan penuh kasih sayang. Setiap anak kami dampingi dengan sabar dan penuh perhatian, membantu mereka menemukan bakat dan potensi terbaik mereka. Terima kasih kepada orang tua yang telah mempercayakan pendidikan putra-putrinya kepada kami.',
+                'order' => 2,
+                'is_active' => true,
+            ],
+            [
+                'name' => 'Bapak Petrus Andi, S.Pd.',
+                'role' => 'Guru Kelas TK B',
+                'content' => 'Pendidikan anak usia dini adalah fondasi penting bagi masa depan. Di Taman Seminari, kami mengintegrasikan pembelajaran dengan nilai-nilai spiritual melalui kegiatan yang interaktif dan kreatif. Saya percaya bahwa setiap anak memiliki keunikan dan potensi luar biasa yang perlu dikembangkan. Mari bersama-sama kita dukung mereka untuk bertumbuh menjadi generasi yang tidak hanya cerdas secara intelektual, tetapi juga kaya akan kasih dan iman kepada Tuhan.',
+                'order' => 3,
+                'is_active' => true,
+            ],
+        ];
+        foreach ($sambutans as $data) {
+            Sambutan::firstOrCreate(['name' => $data['name']], $data);
         }
     }
 }
