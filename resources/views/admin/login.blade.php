@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login CMS - Taman Seminari</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     <style>
@@ -35,22 +36,25 @@
         <form method="POST" action="{{ url('/login') }}" class="space-y-5">
             @csrf
             <div>
-                <label class="block text-sm font-medium text-on-surface mb-1.5">Alamat Email</label>
+                <label class="block text-sm font-medium text-on-surface mb-1.5">Email</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <span class="material-symbols-outlined text-[20px] text-primary/40">mail</span>
                     </div>
-                    <input type="email" name="email" value="{{ old('email') }}" required class="block w-full pl-10 pr-3 py-2.5 border border-primary/10 rounded-xl focus:ring-2 focus:ring-secondary/30 focus:border-secondary sm:text-sm bg-surface-bright focus:bg-white transition-colors placeholder:text-primary/30" placeholder="admin@tamanseminari.com">
+                    <input type="email" name="email" value="{{ old('email') }}" required class="block w-full pl-10 pr-3 py-2.5 border border-primary/10 rounded-xl focus:ring-2 focus:ring-secondary/30 focus:border-secondary sm:text-sm bg-surface-bright focus:bg-white transition-colors placeholder:text-primary/30" placeholder="Masukkan Email">
                 </div>
             </div>
 
-            <div>
+            <div x-data="{ show: false }">
                 <label class="block text-sm font-medium text-on-surface mb-1.5">Kata Sandi</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <span class="material-symbols-outlined text-[20px] text-primary/40">lock</span>
                     </div>
-                    <input type="password" name="password" required class="block w-full pl-10 pr-3 py-2.5 border border-primary/10 rounded-xl focus:ring-2 focus:ring-secondary/30 focus:border-secondary sm:text-sm bg-surface-bright focus:bg-white transition-colors placeholder:text-primary/30" placeholder="••••••••">
+                    <input :type="show ? 'text' : 'password'" name="password" required class="block w-full pl-10 pr-10 py-2.5 border border-primary/10 rounded-xl focus:ring-2 focus:ring-secondary/30 focus:border-secondary sm:text-sm bg-surface-bright focus:bg-white transition-colors placeholder:text-primary/30" placeholder="Kata Sandi">
+                    <button type="button" @click="show = !show" class="absolute inset-y-0 right-0 pr-3 flex items-center text-primary/40 hover:text-primary">
+                        <span class="material-symbols-outlined text-[20px]" x-text="show ? 'visibility_off' : 'visibility'">visibility</span>
+                    </button>
                 </div>
             </div>
 
