@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         <div class="flex-grow">
             @if($activity->image_path)
             <div class="rounded-xl overflow-hidden border border-primary/10 mb-8">
-                <img src="{{ asset('storage/'.$activity->image_path) }}" class="w-full h-auto object-cover" alt="{{ $activity->title }}">
+                <img src="{{ asset('uploads/'.$activity->image_path) }}" class="w-full h-auto object-cover" alt="{{ $activity->title }}">
             </div>
             @endif
             <article class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded',()=>{
                     <a href="{{ route('activity.show', $item->id) }}" class="flex gap-3 group">
                         <div class="w-16 h-16 rounded-lg overflow-hidden shrink-0 border border-primary/5 bg-surface-container-high">
                             @if($item->image_path)
-                                <div class="w-full h-full bg-cover bg-center" style="background-image: url('{{ asset('storage/'.$item->image_path) }}')"></div>
+                                <div class="w-full h-full bg-cover bg-center" style="background-image: url('{{ asset('uploads/'.$item->image_path) }}')"></div>
                             @else
                                 <div class="w-full h-full flex items-center justify-center">
                                     <span class="material-symbols-outlined text-2xl text-outline">celebration</span>

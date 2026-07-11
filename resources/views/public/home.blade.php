@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     
     @forelse($banners as $i => $banner)
     <div class="absolute inset-0 z-0 transition-opacity duration-1000" :class="current === {{ $i }} ? 'opacity-100' : 'opacity-0'">
-        <div class="w-full h-full bg-cover bg-center" style="background-image: url('{{ asset('storage/'.$banner->image_path) }}')"></div>
+        <div class="w-full h-full bg-cover bg-center" style="background-image: url('{{ asset('uploads/'.$banner->image_path) }}')"></div>
         <div class="absolute inset-0 bg-gradient-to-r from-primary/85 via-primary/50 to-primary/20"></div>
         <div class="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent"></div>
     </div>
@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded',()=>{
                 <div class="md:w-96 lg:w-[28rem] shrink-0 flex items-center justify-center p-8">
                     @if($principal->photo_path)
                         <div class="w-full border-4 border-primary/20 rounded-xl overflow-hidden shadow-lg bg-white">
-                            <img src="{{ asset('storage/'.$principal->photo_path) }}" alt="{{ $principal->name }}" class="w-full aspect-[4/3] object-cover">
+                            <img src="{{ asset('uploads/'.$principal->photo_path) }}" alt="{{ $principal->name }}" class="w-full aspect-[4/3] object-cover">
                         </div>
                     @else
                         <div class="w-full aspect-[4/3] flex items-center justify-center border-4 border-primary/20 rounded-xl bg-primary/5">
@@ -193,7 +193,7 @@ document.addEventListener('DOMContentLoaded',()=>{
             <div class="bg-white rounded-2xl overflow-hidden shadow-md border border-primary/10 p-10 text-center hover-lift">
                 <div class="w-36 h-36 mx-auto rounded-full overflow-hidden bg-primary/10 flex items-center justify-center border-[6px] border-primary/20 shadow-lg mb-6">
                     @if($teacher->photo_path)
-                        <img src="{{ asset('storage/'.$teacher->photo_path) }}" alt="{{ $teacher->name }}" class="w-full h-full object-cover">
+                        <img src="{{ asset('uploads/'.$teacher->photo_path) }}" alt="{{ $teacher->name }}" class="w-full h-full object-cover">
                     @else
                         <span class="material-symbols-outlined text-primary text-6xl">person</span>
                     @endif
@@ -220,7 +220,7 @@ document.addEventListener('DOMContentLoaded',()=>{
             <div class="glass-card rounded-xl overflow-hidden hover-lift border border-primary/5 flex flex-col bg-white">
                 <div class="h-48 overflow-hidden bg-surface-container-low">
                     @if($item->image_path)
-                        <div class="w-full h-full bg-cover bg-center transition-transform duration-500 hover:scale-105" style="background-image: url('{{ asset('storage/'.$item->image_path) }}')"></div>
+                        <div class="w-full h-full bg-cover bg-center transition-transform duration-500 hover:scale-105" style="background-image: url('{{ asset('uploads/'.$item->image_path) }}')"></div>
                     @else
                         <div class="w-full h-full flex items-center justify-center">
                             <span class="material-symbols-outlined text-headline-lg text-outline">article</span>
@@ -261,7 +261,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         <div class="glass-card rounded-xl overflow-hidden hover-lift border border-primary/5 flex flex-col bg-white">
             <div class="h-48 overflow-hidden bg-surface-container-low">
                 @if($activity->image_path)
-                    <div class="w-full h-full bg-cover bg-center transition-transform duration-500 hover:scale-105" style="background-image: url('{{ asset('storage/'.$activity->image_path) }}')"></div>
+                    <div class="w-full h-full bg-cover bg-center transition-transform duration-500 hover:scale-105" style="background-image: url('{{ asset('uploads/'.$activity->image_path) }}')"></div>
                 @else
                     <div class="w-full h-full flex items-center justify-center">
                         <span class="material-symbols-outlined text-headline-lg text-outline">celebration</span>
@@ -304,7 +304,7 @@ document.addEventListener('DOMContentLoaded',()=>{
                  active: null,
                  images: [
                      @foreach($galleries as $gallery)
-                     { src: '{{ asset('storage/'.$gallery->image_path) }}', title: '{{ $gallery->title ?: 'Dokumentasi' }}' }@if(!$loop->last),@endif
+                     { src: '{{ asset('uploads/'.$gallery->image_path) }}', title: '{{ $gallery->title ?: 'Dokumentasi' }}' }@if(!$loop->last),@endif
                      @endforeach
                  ],
                  init() {
@@ -313,7 +313,7 @@ document.addEventListener('DOMContentLoaded',()=>{
              }">
             @foreach($galleries as $index => $gallery)
             <div class="group relative overflow-hidden rounded-xl border border-primary/10 aspect-square cursor-pointer" x-on:click="active = {{ $index }}">
-                <img src="{{ asset('storage/'.$gallery->image_path) }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="{{ $gallery->title ?: 'Dokumentasi' }}">
+                <img src="{{ asset('uploads/'.$gallery->image_path) }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="{{ $gallery->title ?: 'Dokumentasi' }}">
                 <div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-gutter">
                     <div class="text-on-primary">
                         <p class="font-label-md text-label-md mb-1 uppercase tracking-wider text-secondary-fixed">Galeri</p>

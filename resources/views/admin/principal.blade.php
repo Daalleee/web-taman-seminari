@@ -17,7 +17,7 @@
             <div class="md:w-80 lg:w-96 shrink-0 flex items-center justify-center p-6">
                 @if($principal->photo_path)
                     <div class="w-full border-4 border-primary/20 rounded-xl overflow-hidden shadow-lg bg-white">
-                        <img src="{{ asset('storage/'.$principal->photo_path) }}" alt="{{ $principal->name }}" class="w-full aspect-[4/3] object-cover">
+                        <img src="{{ asset('uploads/'.$principal->photo_path) }}" alt="{{ $principal->name }}" class="w-full aspect-[4/3] object-cover">
                     </div>
                 @else
                     <div class="w-full h-56 flex items-center justify-center border-4 border-primary/20 rounded-xl bg-primary/5">

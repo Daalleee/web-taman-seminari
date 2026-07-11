@@ -18,7 +18,7 @@ Route::get('/kegiatan/{activity}', [PublicController::class, 'activityDetail'])-
 Route::post('/contact', [PublicController::class, 'storeMessage'])->name('contact.store');
 
 // Serve storage images without symlink
-Route::get('/storage/{path}', function (string $path) {
+Route::get('/uploads/{path}', function (string $path) {
     $fullPath = storage_path('app/public/' . $path);
     if (!file_exists($fullPath)) {
         abort(404);

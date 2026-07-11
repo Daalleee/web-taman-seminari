@@ -19,7 +19,7 @@
             <div class="flex items-start gap-6">
                 <div class="w-20 h-20 rounded-full overflow-hidden bg-primary/10 shrink-0 flex items-center justify-center">
                     @if($principal->photo_path)
-                        <img src="{{ asset('storage/'.$principal->photo_path) }}" alt="{{ $principal->name }}" class="w-full h-full object-cover">
+                        <img src="{{ asset('uploads/'.$principal->photo_path) }}" alt="{{ $principal->name }}" class="w-full h-full object-cover">
                     @else
                         <span class="material-symbols-outlined text-primary text-4xl">person</span>
                     @endif
@@ -96,7 +96,7 @@
                     <div class="flex items-center gap-4 mb-4">
                         <div class="w-16 h-16 rounded-full overflow-hidden bg-primary/10 shrink-0 flex items-center justify-center">
                             @if($teacher->photo_path)
-                                <img src="{{ asset('storage/'.$teacher->photo_path) }}" alt="{{ $teacher->name }}" class="w-full h-full object-cover">
+                                <img src="{{ asset('uploads/'.$teacher->photo_path) }}" alt="{{ $teacher->name }}" class="w-full h-full object-cover">
                             @else
                                 <span class="material-symbols-outlined text-primary text-3xl">person</span>
                             @endif

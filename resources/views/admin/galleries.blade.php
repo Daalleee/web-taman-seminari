@@ -19,7 +19,7 @@
         @forelse($galleries as $gallery)
         <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 group relative">
             <div class="aspect-square w-full relative overflow-hidden">
-                <img src="{{ asset('storage/'.$gallery->image_path) }}" alt="{{ $gallery->title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <img src="{{ asset('uploads/'.$gallery->image_path) }}" alt="{{ $gallery->title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                 <div class="absolute inset-0 bg-slate-900/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4">
                     <p class="text-white text-sm font-medium truncate">{{ $gallery->title ?: 'Tanpa Keterangan' }}</p>
                     <div class="flex justify-end gap-2">

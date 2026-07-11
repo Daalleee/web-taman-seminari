@@ -21,7 +21,7 @@
         @forelse($banners as $banner)
         <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-primary/5 group relative flex flex-col">
             <div class="aspect-video w-full relative overflow-hidden bg-primary/5">
-                <img src="{{ asset('storage/'.$banner->image_path) }}" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <img src="{{ asset('uploads/'.$banner->image_path) }}" alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
             </div>
             <div class="p-5 flex-1 flex flex-col">
                 <div class="flex-1">

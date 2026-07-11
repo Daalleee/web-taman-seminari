@@ -29,7 +29,7 @@
                     <td class="py-4 px-6 w-24">
                         <div class="w-16 h-16 rounded-xl overflow-hidden bg-slate-100 border border-slate-200">
                             @if($activity->image_path)
-                                <img src="{{ asset('storage/'.$activity->image_path) }}" class="w-full h-full object-cover">
+                                <img src="{{ asset('uploads/'.$activity->image_path) }}" class="w-full h-full object-cover">
                             @else
                                 <div class="w-full h-full flex items-center justify-center text-slate-300"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg></div>
                             @endif

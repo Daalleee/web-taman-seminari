@@ -23,7 +23,7 @@
                 <div class="flex items-center gap-6">
                     <div class="w-20 h-20 rounded-full overflow-hidden bg-primary/10 shrink-0 flex items-center justify-center border-2 border-primary/10">
                         @if($teacher->photo_path)
-                            <img src="{{ asset('storage/'.$teacher->photo_path) }}" alt="{{ $teacher->name }}" class="w-full h-full object-cover">
+                            <img src="{{ asset('uploads/'.$teacher->photo_path) }}" alt="{{ $teacher->name }}" class="w-full h-full object-cover">
                         @else
                             <span class="material-symbols-outlined text-primary text-4xl">person</span>
                         @endif
